@@ -238,3 +238,53 @@ Markdown, in most cases. Headings, lists, tables and code blocks tell the model 
 
 - [Website to Markdown and sitemap scraper APIs](../web-content-scrapers)
 - [Get all URLs from a sitemap with Python](get-all-urls-from-sitemap-python)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free way to convert a website to Markdown?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. llms.txt files, Jina Reader's free tier, Firecrawl's free 1,000 pages a month, and the Python libraries trafilatura and markdownify all cost nothing. For a large site, the Python route is the one with no usage limit, at the cost of writing and running the script yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a website to Markdown API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, several: Jina Reader (r.jina.ai), Firecrawl's /v2/scrape endpoint, and Apify Actors such as our Web to Markdown, which return one item per URL with a markdown field."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert HTML to Markdown in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use markdownify to convert a piece of HTML you have selected, or trafilatura.extract(html, output_format=\"markdown\") to extract the main content and convert it in one step. Both are shown above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert a website to Markdown through MCP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. An MCP client such as Claude or Cursor can call a converter as a tool. Firecrawl publishes an MCP server, and any Apify Actor, including ours, can be added through Apify's hosted MCP server at https://mcp.apify.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I give an LLM Markdown or plain text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Markdown, in most cases. Headings, lists, tables and code blocks tell the model how the content is structured, at a small token cost over plain text. Plain text is fine for short prose with no structure."
+      }
+    }
+  ]
+}
+</script>

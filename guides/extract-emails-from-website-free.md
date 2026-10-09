@@ -168,3 +168,53 @@ The site uses Cloudflare's email protection, which encodes the address and decod
 
 - [How to find the sitemap of a website](find-sitemap-of-website)
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I extract all email addresses from a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No single page lists them all. Check the home page footer, Contact, About, Team, Press and Legal Notice or Impressum pages, using view source or the console snippet on each. To cover a whole site, start from its sitemap (how to find a website's sitemap) and run a script over those URLs, keeping the request rate low."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a free online tool to extract emails from a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Several web tools take a URL and return the addresses they find without sign-up, and Hunter and Snov.io give 50 free credits a month. Free online tools usually cap pages or exports, so for one site the view-source method is just as fast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I extract emails from a website with a Chrome extension?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Email extractor extensions collect addresses from pages as you browse. Check the free tier's limits and the permissions it requests before you install one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get an email from a website link without opening every page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Something still has to fetch the pages, but only a few matter: home, contact, about, legal notice and team. The Python script above fetches those for you from one domain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does view source show \"email protected\" instead of an address?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The site uses Cloudflare's email protection, which encodes the address and decodes it in your browser. Read it on the rendered page or with the console snippet."
+      }
+    }
+  ]
+}
+</script>

@@ -180,3 +180,53 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 - [Weibo API in Python（英文）](weibo-api-python)：官方 API 与其他接口的英文说明
 - [B 站弹幕爬虫](bilibili-danmaku-scraper-zh)
 - [微信公众号文章爬虫](wechat-official-account-articles-scraper)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "微博爬虫一定要 Cookie 吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不一定。游客可以看到关键词搜索结果和用户主页的第一页，所以只要公开帖子、不需要深翻用户历史时，可以不登录。翻用户第 2 页以后、抓评论和粉丝列表，基本都需要登录 Cookie。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "微博爬虫在 GitHub 上有哪些？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常用的有 dataabc/weiboSpider、dataabc/weibo-crawler 和 nghuyong/WeiboSpider。选之前看一下最近的提交时间和 issue，微博接口变动后，长期没人维护的项目通常已经失效。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "m.weibo.cn 返回 ok:-100 是什么意思？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "表示这个请求需要登录。用户时间线在游客状态下第 2 页起就会返回这个值，换成你自己登录后的 Cookie 才能继续翻页。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "一个关键词最多能爬多少条微博？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "微博网页搜索每个关键词大约只返回 25 页左右，也就是 1,000 条上下，不管话题有多大。要拿更多，可以把话题拆成几个更具体的关键词，或者每天定时抓取新增内容。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "有没有不用写代码的微博爬虫工具？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "有。托管服务（例如 Apify Store 上的微博爬虫）可以在网页上填关键词直接运行，再导出 CSV 或 Excel。"
+      }
+    }
+  ]
+}
+</script>

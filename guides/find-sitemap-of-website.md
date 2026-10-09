@@ -224,3 +224,53 @@ Open the sitemap, and if it is an index, open every child sitemap it lists, then
 
 - [Find emails from a list of websites](extract-emails-from-website-free): once you have a site's page list, pull the contact details published on it.
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp): let Claude or Cursor run sitemap extraction as a tool.
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I find the sitemap.xml of a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open /robots.txt on the domain and read the Sitemap: line. If there is none, try /sitemap.xml, then /sitemap_index.xml, then the CMS default from the table above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find the sitemap of any website online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free online sitemap finders check the common file names for you. They work the same way as steps 1 and 2 here, so they miss sitemaps at non-standard paths that robots.txt does not list."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does every website have a sitemap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A sitemap is optional. Small sites with good internal links often have none, and search engines still find their pages by following links. If robots.txt, the common paths and a Google search all come up empty, the site most likely has no public sitemap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find the sitemap of a Squarespace or Shopify site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both generate one automatically at /sitemap.xml. On Shopify that file is an index that links to separate product, collection, page and blog sitemaps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get all the URLs of a website from its sitemap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the sitemap, and if it is an index, open every child sitemap it lists, then collect each <loc> value. The Python script above does this for a few sites; for many sites a hosted extractor saves the maintenance."
+      }
+    }
+  ]
+}
+</script>

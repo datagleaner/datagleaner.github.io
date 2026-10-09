@@ -209,3 +209,53 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 - [Bilibili API in Python（英文）](bilibili-api-python)
 - [微博爬虫：用 Python 抓取微博内容](weibo-scraper-zh)
 - [Web scraping for AI agents with MCP（英文）](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "B站弹幕接口还能用吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "我们在 2026 年 10 月测试时，comment.bilibili.com/{cid}.xml 不登录也能返回弹幕，只是限于最近的一批。网页播放器自己用的是 protobuf 格式的 x/v2/dm/web/seg.so 分段接口。两者都是非公开接口，随时可能调整。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "怎么爬取 B站全部历史弹幕？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "公开 XML 拿不到全部。历史弹幕要用登录后的 Cookie 按日期逐天请求，热门视频的数据量很大，请求要放慢。即使这样，被删除或被屏蔽的弹幕也拿不到。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "B站评论爬取为什么只有 3 条？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "这是 B站对未登录访问的限制，不是代码问题。带上自己账号的 SESSDATA Cookie 后，评论接口才会正常翻页。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "弹幕能看到是谁发的吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XML 里只有发送者 UID 的 CRC32 哈希，不是 UID 本身。做统计分析时，用哈希区分\"同一个发送者\"就够了。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "爬 B站弹幕合法吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "取决于所在地区和用途。请阅读 B站用户协议，控制请求频率，只收集公开数据，并注意弹幕和评论的作者是真实用户，在中国《个人信息保护法》和欧盟 GDPR 下都可能属于个人信息。本文不构成法律意见。"
+      }
+    }
+  ]
+}
+</script>

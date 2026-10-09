@@ -154,3 +154,53 @@ Use the official API if your app posts or reads on behalf of logged-in Weibo use
 - [Weibo scraper guide in Chinese (微博爬虫)](weibo-scraper-zh)
 - [Bilibili API in Python](bilibili-api-python)
 - [Web scraping for AI agents over MCP](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free Weibo API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in two senses. The official Open Platform API costs nothing but needs a verified developer account and covers mainly your own and your authorized users' data. The m.weibo.cn JSON endpoints are free and keyless but undocumented and limited for anonymous visitors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a Weibo API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Register at open.weibo.com, create an app, and copy the App Key and App Secret from its settings. You then still need an OAuth access token from a user who authorizes the app before most endpoints answer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I search Weibo posts by keyword with the API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not with an ordinary developer app; search belongs to the higher access levels Weibo grants on application. In practice people search through the website's own endpoints, either directly or through a crawler or hosted scraper, all of which hit Weibo's cap of about 1,000 posts per keyword."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Weibo API on GitHub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no official one. GitHub hosts community SDKs for the Open Platform API and crawlers for the website, such as dataabc/weibo-crawler and nghuyong/WeiboSpider, listed in the table above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to collect Weibo data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Public posts are still personal data. Follow Weibo's terms, keep your request rate low, and make sure your use meets the privacy laws that apply to you, such as GDPR or China's PIPL. This is not legal advice."
+      }
+    }
+  ]
+}
+</script>

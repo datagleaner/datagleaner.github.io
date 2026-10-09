@@ -171,3 +171,53 @@ The redesigned trends.google.com Explore page compares up to 8, but pytrends and
 
 - [Google Hotels, Trends and News scraper APIs](../google-data-scrapers)
 - [How to scrape Google News with Python](google-news-scraper-python)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is pytrends still working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It installs and can still return data, but the project is archived and its last release is from April 2023. It often fails with 429 errors, and when Google changes its Trends endpoints nobody will fix it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I fix the pytrends 429 error?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Slow down. Wait between requests (a minute or more after a 429), retry with growing pauses, and send fewer requests per run. Running from a cloud server makes 429s more likely than from a home connection. There is no setting that removes Google's rate limit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an official Google Trends API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but only as an alpha. Google is accepting applications from developers and has not announced pricing or a date for general availability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a free pytrends alternative?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The trends.google.com website (with CSV downloads), open-source libraries such as trendspyg, and SerpApi's free plan of 250 searches a month are all free. The free libraries are still rate-limited by Google."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get more than 5 keywords in Google Trends?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The redesigned trends.google.com Explore page compares up to 8, but pytrends and similar tools are limited to 5 per request. For more, compare them in groups of up to 5 that share one anchor term, then rescale each group to the anchor, as shown above."
+      }
+    }
+  ]
+}
+</script>

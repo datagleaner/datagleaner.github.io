@@ -207,3 +207,53 @@ Get the video's `cid` from the details endpoint (each part has its own), then do
 - [Bilibili danmaku scraper (Chinese)](bilibili-danmaku-scraper-zh)
 - [Weibo API in Python](weibo-api-python)
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an official Bilibili API for Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Bilibili does not publish a documented API for reading public video, search or comment data, and there is no official Python SDK for it. Python tools such as bilibili-api-python call the website's own undocumented endpoints."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is bilibili-api-python on GitHub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At github.com/Nemo2011/bilibili-api. The PyPI package is bilibili-api-python, the import is bilibili_api. Other PyPI packages with similar names (bilibili-api, bilibili-api-dev) are different releases, so check which one a tutorial installs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Bilibili API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No key exists for these endpoints. The wbi \"key\" is derived from the nav endpoint as shown above, not issued to you. A login cookie (SESSDATA) is optional and only needed for data a logged-out visitor cannot see, such as full comment lists."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I get error 412 or -352?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both are Bilibili's risk control refusing the request, usually because of request speed, a missing or stale wbi signature, or missing browser-like cookies (buvid3). Slow down, refresh the wbi key, use the signed /wbi/ version of the endpoint, and wait before retrying."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get danmaku (bullet comments) in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Get the video's cid from the details endpoint (each part has its own), then download https://comment.bilibili.com/<cid>.xml. Each <d> element is one bullet comment; its p attribute holds the time in the video, display mode, font size, color and send time. Our Chinese guide on scraping Bilibili danmaku goes further."
+      }
+    }
+  ]
+}
+</script>

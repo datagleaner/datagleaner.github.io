@@ -151,3 +151,53 @@ What it does not do, so you can rule it out quickly: it stops at Weibo's cap of 
 - [Weibo, Bilibili and Xiaohongshu scraper APIs compared](../chinese-social-media-scrapers)
 - [How to scrape Bilibili comments and danmaku](scrape-bilibili-comments-danmaku)
 - [How to scrape Xiaohongshu (RedNote)](scrape-xiaohongshu-rednote)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Weibo have a public API for posts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Weibo has an Open Platform, but it is built for apps that users authorize through OAuth, and it does not give an ordinary developer app keyword search over all public posts. For public posts on a topic, people use the site's web endpoints through their own code, an open-source crawler or a hosted scraper."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Weibo API key or account to scrape Weibo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for the first page of a user's timeline or for limited keyword search: an anonymous visitor cookie is enough, as the script above shows. You need a logged-in account's cookie for full user histories, deep keyword search, comments and reposts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does weibo-crawler still need a cookie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For user posts the cookie is optional, and its README says most posts come back without one. Keyword search and repost crawling require it, and weibo-search requires it for everything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Weibo return ok: -100?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That response carries a sign-in URL and means the page you asked for is closed to visitors without a login, such as page 2 of a user's timeline. A fresh visitor cookie does not change it; only a logged-in session does."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to scrape Weibo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your jurisdiction and use. Read Weibo's terms, keep your request rate low, collect only public posts, and remember that posts and profiles are personal data under laws such as GDPR and China's PIPL. This is not legal advice."
+      }
+    }
+  ]
+}
+</script>

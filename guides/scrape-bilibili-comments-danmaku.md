@@ -218,3 +218,53 @@ What it does not do: it does not download video files, does not list an uploader
 - [Weibo, Bilibili and Xiaohongshu scraper APIs compared](../chinese-social-media-scrapers)
 - [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
 - [How to scrape Xiaohongshu (RedNote)](scrape-xiaohongshu-rednote)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I download danmaku from a Bilibili video?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Find the part's cid (from api.bilibili.com/x/player/pagelist?bvid=<BV id>), then download https://comment.bilibili.com/<cid>.xml. The script in Option 1 does both for every part of a video."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert Bilibili danmaku XML to ASS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Install biliass with pip and run biliass file.xml -s 1920x1080 -o file.ass, matching -s to the video's resolution. The ASS file plays as a subtitle track in mpv, VLC and most desktop players."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download all Bilibili comments without logging in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Anonymous visitors get about 3 to 4 top comments per video. For full lists, every tool (including ours) needs the SESSDATA cookie of an account you own."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Bilibili danmaku downloader on GitHub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, several: bilibili-api-python covers danmaku and comments in Python, and Danmaku2ASS and biliass convert the XML to subtitles. Check when a project was last updated, because Bilibili changes its endpoints."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the danmaku XML include who sent each message?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It includes a hash of the sender's user id (field 6 of p), not the user id or name."
+      }
+    }
+  ]
+}
+</script>

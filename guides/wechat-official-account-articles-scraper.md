@@ -169,3 +169,53 @@ Fetch the article link, take the `#js_content` element, copy image `data-src` va
 - [Weibo API in Python](weibo-api-python): collect public posts from China's other big social platform.
 - [Bilibili API in Python](bilibili-api-python): video, comment and danmaku data from Bilibili.
 - [Scrape Medium articles](scrape-medium-articles): the same task for English-language articles.
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a WeChat Official Account API for reading other accounts' articles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. WeChat's official API lets an account manage its own content, not read other accounts. Collecting other accounts' articles goes through public article pages, Sogou search, or a logged-in backend as described above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape all articles from one WeChat public account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no public archive, so a no-login tool can only find what search surfaces. The best-known full-history exporter, wechat-article-exporter, stopped working in 2026 after WeChat closed the backend interface it used (method 3). The dependable approach now is to collect links as the account publishes and fetch each one (method 1)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get read counts (阅读量) and likes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not from anonymous pages; those numbers appear only inside the WeChat app. Some open-source tools get them by capturing traffic from a logged-in WeChat client, which needs a WeChat account and extra setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Sogou WeChat search show a verification page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sogou rate-limits searches. Slow down, search by hand for small jobs, and stop when the verification page appears rather than retrying quickly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I save a WeChat article as Markdown?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fetch the article link, take the #js_content element, copy image data-src values into src, and convert the HTML with a library like markdownify (method 1)."
+      }
+    }
+  ]
+}
+</script>

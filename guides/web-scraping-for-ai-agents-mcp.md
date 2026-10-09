@@ -237,3 +237,53 @@ Run `claude mcp add --transport http apify https://mcp.apify.com`, then `/mcp` t
 ### Which is better for an agent, a browser MCP or a scraper MCP?
 
 Use a browser MCP when the task needs clicks, forms or a logged-in session on one site. Use a scraper when you want structured data from many pages: the scraper does the page-by-page work outside the model, so the agent spends one tool call instead of dozens.
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free web scraping MCP server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The fetch reference server and Microsoft's Playwright MCP both run on your own machine for free. They fetch or browse one page at a time, which is enough for reading pages but slow for collecting data in bulk. Apify's server itself has no separate fee: you pay for the Actors you run, and the free plan's monthly credit covers small tests."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Apify MCP server URL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "https://mcp.apify.com. Add ?tools= with a comma-separated list of tool categories or Actor names (owner/actor-name) to choose what the agent sees. The older ?actors= parameter still works for Actors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an Apify API token for the MCP server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not if your client supports OAuth: give it the URL alone and sign in when the browser opens. Use a token, sent as Authorization: Bearer <token>, for clients without OAuth, for the local npx server (as the APIFY_TOKEN environment variable) and for automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use the Apify MCP server in Claude Code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run claude mcp add --transport http apify https://mcp.apify.com, then /mcp to sign in. To limit it to specific scrapers, use a URL such as https://mcp.apify.com?tools=actors,storage,datagleaner/sitemap-extractor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is better for an agent, a browser MCP or a scraper MCP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a browser MCP when the task needs clicks, forms or a logged-in session on one site. Use a scraper when you want structured data from many pages: the scraper does the page-by-page work outside the model, so the agent spends one tool call instead of dozens."
+      }
+    }
+  ]
+}
+</script>

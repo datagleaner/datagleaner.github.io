@@ -187,3 +187,53 @@ Only the preview Medium shows to logged-out visitors. The full text of member-on
 - [How to find the sitemap of a website](find-sitemap-of-website), another way to list every article URL on a blog that publishes one.
 - [WeChat Official Account articles scraper](wechat-official-account-articles-scraper), for collecting articles from China's main publishing platform.
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp), to let Claude or Cursor run scrapers like the ones above.
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I scrape Medium articles with Python for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Read the RSS feed for the author, publication or tag (https://medium.com/feed/...) with requests and an XML parser, as in Method 1. It is free and needs no key, but returns only the 10 newest stories per feed, and tag feeds give snippets rather than full text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Medium RSS feed limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every Medium feed returns the 10 most recent stories, and there is no parameter to page further back. To build a longer history, poll the feed regularly and store new items, or use a source that pages through the archive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Medium RSS feed URL for a user or publication?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For a user, https://medium.com/feed/@username. For a publication on medium.com, https://medium.com/feed/publication-slug. For a publication on its own domain, https://domain.com/feed. For a tag, https://medium.com/feed/tag/tagname."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Medium API for Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not an official one for reading. Medium's official API only published posts and no longer issues tokens. You can call the undocumented GraphQL endpoint the website uses, pay for a third-party wrapper, or run a hosted scraper through the apify-client Python package."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I scrape member-only Medium articles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only the preview Medium shows to logged-out visitors. The full text of member-only stories is behind the paywall; respect it."
+      }
+    }
+  ]
+}
+</script>

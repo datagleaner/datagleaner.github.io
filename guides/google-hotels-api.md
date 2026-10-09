@@ -187,3 +187,53 @@ It depends on the route: per search on SerpApi (from $25 a month for 1,000 searc
 - [Google Trends API: the options and how to use them](google-trends-api)
 - [Google Ads Transparency Center API](google-ads-transparency-center-api)
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a Google Hotels API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for reading prices. Google's Hotel APIs and Hotel Center are for partners that send their own prices to Google. To read Google Hotels prices you use a third-party API or scraper."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a free Google Hotels API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Google Places API has a monthly free allowance, but it returns no prices. For prices, SerpApi's free plan gives 250 searches a month, and Apify gives new accounts a small monthly free credit that covers small test runs of an Actor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a Google Hotels API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no key for a Google Hotels price API. A Google Cloud API key works with the Places API (no prices). For prices, you get a key from the third-party service you use, such as SerpApi or Apify."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I track Google Hotels prices over time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run the same search on a schedule for the same dates, guests, currency and market, and compare the lowest price or each booking site's price between runs. Apify can schedule an Actor run daily; each record carries scrapedAt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a Google Hotels API cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the route: per search on SerpApi (from $25 a month for 1,000 searches), per block of results or per hotel on DataForSEO, and $3.00 per 1,000 hotels on our Apify Actor."
+      }
+    }
+  ]
+}
+</script>

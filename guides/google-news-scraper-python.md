@@ -197,3 +197,53 @@ You cannot page a single feed. Run several narrower queries (by date window, sit
 - [Google data scrapers](../google-data-scrapers)
 - [Convert a website to Markdown for an LLM](convert-website-to-markdown-for-llm)
 - [Web content scrapers](../web-content-scrapers)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an official Google News API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Google retired its Google News Search API years ago. The RSS feeds are the public, documented-by-use way to read Google News; SERP APIs and hosted scrapers sell structured access on top."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get the Google News RSS feed for a search in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Request https://news.google.com/rss/search?q=YOUR+QUERY&hl=en-US&gl=US&ceid=US:en and parse the response with feedparser, as in step 1. Change hl, gl and ceid together for another country or language."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do Google News RSS links not go to the article?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They point to news.google.com/rss/articles/..., which a browser resolves with JavaScript. Use the decode function in step 2, the googlenewsdecoder package, or a tool that decodes for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get Google News articles from a specific date range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add after:YYYY-MM-DD before:YYYY-MM-DD to the query, or use when:7d for the last week. GNews also accepts start_date and end_date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape more than 100 Google News results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You cannot page a single feed. Run several narrower queries (by date window, site or wording) and merge them, removing duplicates."
+      }
+    }
+  ]
+}
+</script>

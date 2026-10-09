@@ -237,3 +237,53 @@ Yes. Open the sitemap in your browser for a small site, use an online sitemap UR
 - [How to find the sitemap of a website](find-sitemap-of-website): when robots.txt and /sitemap.xml come up empty.
 - [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites)
 - [Web content scrapers](../web-content-scrapers)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I extract all URLs from a sitemap XML file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Parse it with xml.etree.ElementTree and collect every <loc> inside <url>, using the sitemap namespace http://www.sitemaps.org/schemas/sitemap/0.9. If the root is <sitemapindex>, fetch each listed sitemap and repeat, as the full script above does."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find a website's sitemap URL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open https://example.com/robots.txt and look for Sitemap: lines. If there are none, try /sitemap.xml, /sitemap_index.xml and, on WordPress, /wp-sitemap.xml."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does findall(\"url\") return an empty list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sitemap tags are in a namespace. Use root.findall(\"sm:url/sm:loc\", {\"sm\": \"http://www.sitemaps.org/schemas/sitemap/0.9\"}) or the {namespace}tag form shown above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I read a sitemap.xml.gz file in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Download it with requests and call gzip.decompress() on the bytes if they start with 1f 8b, then parse as normal. Checking the bytes is safer than checking the extension, because some servers already decompress the file in transit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get all URLs from a sitemap without coding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Open the sitemap in your browser for a small site, use an online sitemap URL extractor for one site, or run a hosted tool such as Sitemap URL Extractor for many sites and download the result as CSV."
+      }
+    }
+  ]
+}
+</script>

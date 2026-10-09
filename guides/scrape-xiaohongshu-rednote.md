@@ -176,3 +176,53 @@ It depends on where you are, what you collect and what you do with it, and this 
 - [Weibo, Bilibili and Xiaohongshu scraper APIs compared](../chinese-social-media-scrapers)
 - [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
 - [How to scrape Bilibili comments and danmaku](scrape-bilibili-comments-danmaku)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a Xiaohongshu API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for reading public data. Xiaohongshu's open platform serves merchants and advertisers working with their own stores and campaigns. To read notes and profiles you scrape the website, or call a hosted scraper that exposes the result as an API."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I scrape Xiaohongshu without logging in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for single notes (with xsec_token in the link), profiles with their newest notes, and the discovery feeds. Keyword search and comments need a login."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Xiaohongshu scraper on GitHub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Several. MediaCrawler is the most widely used and covers keyword search and comments through a logged-in browser session. Check each project's license (MediaCrawler's is non-commercial) and its last update date, and expect the account you log in with to carry the ban risk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my Xiaohongshu note link return nothing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The link is missing its xsec_token parameter, or Xiaohongshu redirected you to a login page because of too many requests. Copy the full link again from the Share button and slow down."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is scraping Xiaohongshu legal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on where you are, what you collect and what you do with it, and this is not legal advice. Reading public pages is a different act from logging in and automating an account against the terms of service. If you keep names, bios or locations, data-protection laws such as China's PIPL and the GDPR apply to how you store and use them."
+      }
+    }
+  ]
+}
+</script>

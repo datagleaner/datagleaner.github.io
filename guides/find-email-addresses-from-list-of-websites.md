@@ -196,3 +196,45 @@ Reading public pages is generally allowed, but storing and emailing the addresse
 - [How to extract emails from a website for free](extract-emails-from-website-free)
 - [How to find a YouTube channel's email](find-youtube-channel-email)
 - [Get all URLs from a sitemap with Python](get-all-urls-from-sitemap-python)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I extract emails from websites for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check the contact and legal pages by hand, or run the Python script above. Hunter's free plan gives 50 credits a month, and on our scraper a small run costs a fraction of a cent, which Apify's free plan credit covers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I find all email addresses on a domain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only the ones that are published or that a finder tool has seen elsewhere. A scraper returns what the site shows; Hunter-style tools add addresses from their database and guesses from the company's email pattern. No tool can list every mailbox on a domain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my scraper find no emails on a site that clearly shows one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The address is probably hidden with [at] text, Cloudflare email protection, an image, or JavaScript, or it sits on a contact page your script never visited. See the pitfalls list above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to scrape email addresses from websites?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reading public pages is generally allowed, but storing and emailing the addresses is regulated by GDPR, CAN-SPAM and similar laws. See the legal section above and check the rules where you and your recipients are."
+      }
+    }
+  ]
+}
+</script>

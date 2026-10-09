@@ -156,3 +156,53 @@ A rough rule:
 - [Google Ads Transparency Center API](google-ads-transparency-center-api)
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp)
 - [Pytrends alternatives for Google Trends in Python](pytrends-alternative-google-trends-python)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an official Google Trends API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, since July 2025, but only as an alpha. You apply on Google's Trends API page and Google picks testers; there is no self-serve key, published price or general availability date yet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Google Trends API free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google has not published pricing for the alpha. The free routes today are the Trends website's CSV downloads, the Trending Now RSS feed and the unofficial endpoints that pytrends used. Paid options charge per search or per result."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get access to the Google Trends API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apply through the form on developers.google.com/search/apis/trends with a concrete use case. Google prioritizes applicants who can start soon and give feedback. While you wait, use one of the other routes on this page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the Google Trends API limits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google has not published quotas for the alpha. Its data covers about the last five years at daily, weekly, monthly or yearly granularity. The unofficial endpoints have no published limits either, but Google returns HTTP 429 when requests come too fast from one IP."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Google Trends API for Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The official alpha does not have a public Python library yet. pytrends is archived. You can call SerpApi or our Actor from Python with their clients, as in the example above, or parse the RSS feed with feedparser."
+      }
+    }
+  ]
+}
+</script>

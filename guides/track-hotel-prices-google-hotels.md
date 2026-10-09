@@ -160,3 +160,53 @@ A simple layout that works in a spreadsheet or any database: one row per hotel p
 
 - [Google Hotels, Trends and News scraper APIs](../google-data-scrapers)
 - [Scraping Google News with Python](google-news-scraper-python)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Google Hotels have price tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Signed in to a Google account, with dates set, you can turn on tracking for one hotel or for a city search, and Google emails you when the price changes for those dates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I set a price alert on Google Hotels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Search the hotel or the city with your dates, then turn on the price tracking toggle on the hotel's prices or at the top of the results list. Alerts go to your Google account's email address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Google Hotels show a hotel's price history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not as data you can download. The tracking toggle emails you about changes; it does not keep a table of past prices. For that, record prices on a schedule yourself or with a scraper and keep each run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a Google Hotels API for prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not one you can read prices from. Google's hotel APIs are for hotels and booking sites that send prices to Google. Reading prices means using the public Google Hotels results, by hand or with a scraper."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I check hotel prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once a day is enough for most trips and most competitor tracking. Checking more often than daily rarely changes a booking decision, and checking less often keeps the cost and the load on Google low."
+      }
+    }
+  ]
+}
+</script>

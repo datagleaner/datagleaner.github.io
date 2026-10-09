@@ -148,3 +148,53 @@ Telegram Desktop gives HTML or JSON only. Load the JSON in Python (`pandas.json_
 
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp): run scrapers like this one from Claude, Cursor or other MCP clients.
 - [Weibo API in Python](weibo-api-python): the same choice between official APIs, your own code and a hosted scraper, for Weibo.
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I export a Telegram channel on my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Android and iOS apps have no chat export. Use Telegram Desktop on a computer, or open t.me/s/<channel> in a mobile browser to read a public channel's recent posts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I export a Telegram channel I am not a member of?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For a public channel, Telethon can read it by username without joining, and the t.me/s/ preview (or a scraper built on it) needs no account at all. Telegram Desktop may ask you to join before it offers the export. A private channel cannot be exported unless you are a member."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is \"Export chat history\" missing or greyed out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Either you are on the phone app or Telegram Web, which do not have it, or the channel has Restrict saving content turned on, which blocks exporting, forwarding and saving its content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export a channel's members or subscribers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not from a channel you do not administer. Telegram shows the subscriber count publicly, but the member list is visible only to the channel's admins. None of the methods above lists a public channel's subscribers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get the export into CSV or Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Telegram Desktop gives HTML or JSON only. Load the JSON in Python (pandas.json_normalize on the messages list) and save it as CSV, or write CSV directly from a Telethon script. A hosted scraper's dataset downloads as CSV or Excel directly."
+      }
+    }
+  ]
+}
+</script>

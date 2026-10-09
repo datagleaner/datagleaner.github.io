@@ -177,3 +177,53 @@ SEEK serves at most about 500 results per search. To cover more, split the searc
 
 - [Web scraping for AI agents with MCP](web-scraping-for-ai-agents-mcp)
 - [Google Trends API: the options and how to use them](google-trends-api)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does SEEK have a public API for job listings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The SEEK API is for approved software providers that post job ads and handle applications for hirers. It has no job search and does not return other employers' ads."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a SEEK API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Software providers request access through the Integration Request form on developer.seek.com, and SEEK must approve it. There is no self-serve key, and it would not give you job search anyway. Hosted scrapers use their own platform's token instead, such as an Apify API token."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export SEEK job search results to Excel or CSV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not from SEEK's website. A scraper returns the results as JSON or CSV; on Apify, any run's dataset can be downloaded as CSV or Excel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for SEEK New Zealand?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The official SEEK API covers both markets for hirers. For listings data, our scraper takes country: \"NZ\" or a seek.co.nz search URL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many jobs can I get from one SEEK search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEEK serves at most about 500 results per search. To cover more, split the search by location, category, work type or date range, or collect new ads daily."
+      }
+    }
+  ]
+}
+</script>

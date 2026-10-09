@@ -111,3 +111,45 @@ For ads shown in Europe, query the BigQuery dataset by `advertiser_disclosed_nam
 - [Google Trends API: free routes and their limits](google-trends-api)
 - [Google Hotels API: getting hotel prices as JSON](google-hotels-api)
 - [Web scraping for AI agents over MCP](web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an official Google Ads Transparency Center API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Google Ads API does not cover it. The closest official source is the free BigQuery dataset bigquery-public-data.google_ads_transparency_center, which covers ads shown in the EEA and Turkey."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is in the Google Ads Transparency Center BigQuery dataset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two tables: creative_stats (one row per ad, with advertiser, format, topic, first and last shown dates and impression ranges per region, and targeting categories) and removed_creative_stats (removed ads with the policy reason). It does not include creative images or ad text, and only covers the EEA and Turkey."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find a Google advertiser ID?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Search the advertiser on adstransparency.google.com and copy the part of the page URL that starts with AR. A scraper that accepts company names, such as ours via searchTerms, resolves the ID for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download all of a competitor's Google ads?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For ads shown in Europe, query the BigQuery dataset by advertiser_disclosed_name or advertiser_id and export the result. For other regions the website has no download, so use a scraper API with the competitor's domain or advertiser ID."
+      }
+    }
+  ]
+}
+</script>
