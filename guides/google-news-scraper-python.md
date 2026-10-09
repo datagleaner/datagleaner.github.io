@@ -114,7 +114,7 @@ On 2026-10-09 this returned publisher URLs such as `https://www.politico.eu/arti
 | [googlenewsdecoder](https://pypi.org/project/googlenewsdecoder/) | Decodes `news.google.com` links: `gnewsdecoder(url, interval=1)` returns `{"success": ..., "decoded_url": ...}` | Free | Version 0.2.1 failed to import with selectolax 1.0 in our test; `pip install "selectolax<1"` fixed it |
 | pygooglenews | An older RSS wrapper that many tutorials still use | Free | No release in years and old dependency pins; prefer GNews |
 | SERP APIs (SerpApi, ScrapingBee, Scrapingdog and others) | Google News results as JSON from their own infrastructure | Paid per search, with small free tiers | Billed per request; check which fields and which Google page (News tab or news.google.com) they return |
-| Google News Scraper on Apify (ours, below) | Search, sections and any news.google.com URL, with publisher URLs decoded | $1.50 per 1,000 articles | Not free; needs an Apify account |
+| Google News Scraper on Apify (ours, below) | Search, sections and any news.google.com URL, with publisher URLs decoded; optional splitting past 100 per query | $1.50 per 1,000 articles | Not free; needs an Apify account |
 
 GNews and googlenewsdecoder together give you the same result as the code above:
 
@@ -139,7 +139,7 @@ Disclosure: Google News Scraper is ours (Data Gleaner).
 **Google News Scraper is coming to the Apify Store.** Until it is listed, see [Data Gleaner on Apify](https://apify.com/datagleaner).
 <!-- TODO(store-link: google-news-scraper) -->
 
-It runs the same RSS approach on Apify's servers: you send search queries, section names (`TOP`, `WORLD`, `BUSINESS` and the rest) or any `news.google.com` URL, and get one JSON row per article with `title`, `source`, `publishedAt`, the decoded publisher URL in `articleUrl` and the original `googleNewsUrl`. Section feeds also carry `relatedArticles`. Set `language` and `country` (for example `ja` and `JP`) and it derives the `ceid` for you; `timeframe` adds a `when:` filter to every query. An optional `fetchArticleMeta` setting opens each publisher page for its image, description and author. Articles are deduplicated across the run. If one link cannot be decoded, the row still comes back with `articleUrl` empty.
+It runs the same RSS approach on Apify's servers: you send search queries, section names (`TOP`, `WORLD`, `BUSINESS` and the rest) or any `news.google.com` URL, and get one JSON row per article with `title`, `source`, `publishedAt`, the decoded publisher URL in `articleUrl` and the original `googleNewsUrl`. Some topic and front-page feeds also carry `relatedArticles`. Set `language` and `country` (for example `ja` and `JP`) and it derives the `ceid` for you; `timeframe` adds a `when:` filter to every query. `fetchArticleMeta` (on by default) opens each publisher page for its image, description and author; publishers that refuse automated requests leave those fields empty, so turn it off for a faster run with links only. Articles are deduplicated across the run. If one link cannot be decoded, the row still comes back with `articleUrl` empty.
 
 It costs **$1.50 per 1,000 articles** ($0.0015 per article), billed per article returned. The 10-article run below costs about $0.015. You need an Apify account and its API token.
 
@@ -165,7 +165,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
     print(f'    {item.get("articleUrl") or item.get("googleNewsUrl")}')
 ```
 
-The other inputs are `topics`, `feedUrls`, `language` (default `en-US`), `country` (default `US`), `decodeUrls` (default on), `fetchArticleMeta` (default off), `requestDelaySeconds` and `maxConcurrency`. It has the same per-feed ceiling as the free route: about 100 articles per query.
+The other inputs are `topics`, `feedUrls`, `language` (default `en-US`), `country` (default `US`), `decodeUrls` (default on), `fetchArticleMeta` (default on), `splitByTime`, `splitMaxArticles`, `requestDelaySeconds`, `maxConcurrency` and `proxyConfiguration`. Each feed stops at about 100 articles, as on the free route. For a search query, `splitByTime` re-asks Google over day windows and merges the results, up to `splitMaxArticles` (default 500, at most 5,000) per query; it covers the last 90 days or your `timeframe`, not a full archive, and every extra article is billed.
 
 ## Limits that apply to every route
 
@@ -190,7 +190,7 @@ They point to `news.google.com/rss/articles/...`, which a browser resolves with 
 Add `after:YYYY-MM-DD before:YYYY-MM-DD` to the query, or use `when:7d` for the last week. GNews also accepts `start_date` and `end_date`.
 
 **How do I scrape more than 100 Google News results?**
-You cannot page a single feed. Run several narrower queries (by date window, site or wording) and merge them, removing duplicates.
+You cannot page a single feed. Run several narrower queries (by `after:`/`before:` date window, `site:` or wording) and merge them, removing duplicates by URL. Our Apify Actor's `splitByTime` option does the date-window splitting for you.
 
 ## Related pages
 
@@ -241,7 +241,7 @@ You cannot page a single feed. Run several narrower queries (by date window, sit
       "name": "How do I scrape more than 100 Google News results?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You cannot page a single feed. Run several narrower queries (by date window, site or wording) and merge them, removing duplicates."
+        "text": "You cannot page a single feed. Run several narrower queries (by after:/before: date window, site: or wording) and merge them, removing duplicates by URL. Our Apify Actor's splitByTime option does the date-window splitting for you."
       }
     }
   ]

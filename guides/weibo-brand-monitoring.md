@@ -207,8 +207,8 @@ Treat the output as a first pass. Check a sample of 30 to 50 labels against your
 
 ## What this setup does not do
 
-- **Comments cost extra.** The Actor has an `includeComments` switch that adds top-level comments to each post, at the price of extra requests; check the Actor page for its current pricing before you turn it on.
-- **No full history.** Each keyword stops at about 1,000 posts. Daily runs build your own archive going forward, but you cannot reconstruct last year from one run.
+- **Comments cost extra.** The Actor's `includeComments` switch adds top-level comments (hottest first) to each post, billed at $2 per 1,000 comments on top of the post price, and it makes runs slower. Turn it on for the shortlist rather than the whole daily run.
+- **History is capped per date range.** Each keyword stops at about 1,000 posts. To look back, set `sinceDate` and `untilDate` and run the keyword over several narrower periods, each up to that cap; for a large brand, a full year still takes many runs and will not be complete. Daily runs build your own archive going forward.
 - **No private or follower-only posts.** Only what a logged-out visitor can see.
 - **Gaps are possible.** Results come from Weibo's search, which can be throttled or incomplete, so treat counts as a sample of public posts, not a census.
 - **Weibo only.** Xiaohongshu, Douyin and WeChat need their own sources. See our [Xiaohongshu guide](scrape-xiaohongshu-rednote) and the [WeChat articles guide](wechat-official-account-articles-scraper).
@@ -239,7 +239,6 @@ Yes. Add a keyword group for each competitor and compare post counts, engagement
 ## Related guides
 
 - [Weibo API in Python: official API, m.weibo.cn and options](weibo-api-python): what Weibo gives developers and what a visitor without a login can reach.
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python): the three routes in more detail, with limits.
 - [Scrape Xiaohongshu (RedNote) notes and profiles](scrape-xiaohongshu-rednote): the next platform to cover for Chinese consumer sentiment.
 
 <!-- jsonld:auto -->

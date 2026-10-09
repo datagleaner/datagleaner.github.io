@@ -73,6 +73,30 @@ The manual steps take a few minutes per channel. For a list of fifty or five hun
 
 Note that the YouTube Data API does not return the business email behind the "View email address" button; only the creator's published text is available to it.
 
+### Free: channel descriptions through the YouTube Data API
+
+Create an API key in the Google Cloud console (enable "YouTube Data API v3"), then read each channel's description and pull the emails out of it. A `channels.list` call costs 1 unit of the default 10,000-unit daily quota, so a few hundred channels a day is free.
+
+```python
+# pip install requests
+import os
+import re
+
+import requests
+
+KEY = os.environ["YOUTUBE_API_KEY"]
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+
+for handle in ["@mkbhd", "@aliabdaal"]:
+    r = requests.get("https://www.googleapis.com/youtube/v3/channels", params={
+        "part": "snippet", "forHandle": handle, "key": KEY}, timeout=20)
+    items = r.json().get("items", [])
+    desc = items[0]["snippet"]["description"] if items else ""
+    print(handle, sorted(set(EMAIL.findall(desc))) or "no email in description")
+```
+
+This only sees the channel description. It misses addresses written as `name (at) domain`, and it does not open the creator's website or link-in-bio page; steps 2 and 3 above, or a scraper, cover those.
+
 ### YouTube Channel Email & Influencer Contacts Finder
 
 Disclosure: Data Gleaner is us. Our YouTube Channel Email & Influencer Contacts Finder (`youtube-channel-contacts`) is not listed on the Apify Store yet; it will appear on the [Data Gleaner store page](https://apify.com/datagleaner) when it is.
@@ -89,6 +113,8 @@ It does steps 2 and 3 above for each channel:
 It does **not** reveal the address behind the "View email address" button and never touches the CAPTCHA. Instead it reports `hasBusinessEmailButton` for each channel, so you know which creators you would have to look up by hand. On our test runs, about 45% of a mixed sample of 20 channels and 20 to 30% of a 30-channel "fitness coach" search had a public email; small channels rarely publish one.
 
 **Price:** $0.015 per channel where at least one public email was found. Channels with no email, and channels that could not be read, are free.
+
+Once it is listed, you call it like this:
 
 ```python
 # pip install apify-client
@@ -119,7 +145,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 
 This run covers 2 named channels plus at most 5 from the keyword, so it costs at most 7 x $0.015 = $0.105.
 
-If you already have the creators' websites rather than their channels, our [guide to finding emails from a list of websites](find-email-addresses-from-list-of-websites) covers that case, including the [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper), which is live now. More tools are on the [contact and lead scrapers](../contact-and-lead-scrapers) page.
+If you already have the creators' websites rather than their channels, our page on [finding emails from a list of websites](../contact-and-lead-scrapers) covers that case, including the [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper), which is live now.
 
 ## Using the emails responsibly
 

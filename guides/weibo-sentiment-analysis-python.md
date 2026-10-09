@@ -24,7 +24,7 @@ Which keywords to track, how to run a search daily and how to triage by engageme
 Sentiment by province and by day needs three fields next to the text: when the post was written, where it was sent from, and how much engagement it got. The options for getting them:
 
 - **The official Open Platform API.** Free, but it needs a verified developer account and mainly covers your own and your authorized users' data. See [Weibo API in Python](weibo-api-python).
-- **Your own script against the public site.** Free, and you maintain it when Weibo changes. See [How to scrape Weibo posts with Python](scrape-weibo-posts-python).
+- **Your own script against the public site.** Free, and you maintain it when Weibo changes. See [Weibo API in Python](weibo-api-python).
 - **A hosted scraper**, described near the end of this page.
 - **An open-source toolkit.** [Weibo-Analyst](https://gitee.com/g_12/Weibo-Analyst) on Gitee is a beginner-level Chinese-language toolbox that crawls Weibo comments and runs segmentation, word clouds, sentiment and LDA topics on them.
 
@@ -200,7 +200,7 @@ The minimum of 20 posts per province is a judgment call: with five posts, one an
 
 The Data Gleaner Weibo Scraper (`datagleaner/weibo-scraper` on Apify) returns public posts found by keyword with no Weibo login, cookie or API key. It costs $3 per 1,000 posts, charged only for posts saved to the dataset, so a 1,000-post sample for one keyword is $3. Each item has `text` as plain text (HTML removed, emoji as `[name]`), `createdAt` as ISO 8601 with timezone, `likesCount`, `repostsCount`, `commentsCount`, `region` (the province Weibo shows) and `author`.
 
-Its main limit is your sample size: Weibo serves about 1,000 posts per keyword search, however large the topic. For more, split the topic into narrower keywords, or collect one date range at a time with `sinceDate` and `untilDate`. Only public posts are returned. Weibo can also throttle its guest access, so a run can return fewer posts than requested.
+Its main limit is your sample size: Weibo serves about 1,000 posts per keyword search, however large the topic. For more, split the topic into narrower keywords, or collect one date range at a time with `sinceDate` and `untilDate`. Only public posts are returned. Weibo can also throttle its guest access, so a run can return fewer posts than requested. To score the replies under posts as well, set `includeComments` (and `maxCommentsPerPost`): each post then carries a `comments` list with `text`, `likesCount` and `region`, billed at $2 per 1,000 comments.
 
 The input fields used here are `searchQueries`, `maxItemsPerQuery`, `sinceDate` and `untilDate`. This script saves the dataset in the `posts.json` format the analysis reads:
 
@@ -249,7 +249,6 @@ This run costs at most $3: `max_total_charge_usd` stops it there even if you lat
 ## Related guides
 
 - [Weibo brand monitoring: a low-cost social listening setup](weibo-brand-monitoring): the keyword list, daily runs and triage that come before this analysis.
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python): free ways to collect the posts.
 - [Weibo API in Python](weibo-api-python): the official API, the website endpoints and hosted options compared.
 
 <!-- jsonld:auto -->

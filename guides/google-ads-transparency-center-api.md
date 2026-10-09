@@ -5,7 +5,7 @@ description: "There is no official Google Ads Transparency Center API. How to ge
 
 # Google Ads Transparency Center API
 
-Google does not offer an official API for the Google Ads Transparency Center (adstransparency.google.com). There is no endpoint in the Google Ads API for it and no developer key to request. You have three ways to get the data in bulk: Google's free public dataset in BigQuery, which covers ads shown in the European Economic Area (EEA) and Turkey; the website itself, which covers every region but has no export; and third-party scraper APIs that read the website and return JSON. Which one fits depends on whether you need ads outside Europe and whether you need impression counts.
+Google has no general-purpose API for the Google Ads Transparency Center (adstransparency.google.com): there is no endpoint in the Google Ads API for it and no developer key to request. The only official machine-readable access is what Google's help page calls API access to data about ads served in the European Economic Area (EEA), published as a free BigQuery dataset and JSON downloads that cover the EEA and Turkey. For ads shown elsewhere, Google offers API access only to regulators and self-regulatory organizations. So you have three ways to get the data in bulk: that free dataset; the website itself, which covers every region but has no export; and third-party scraper APIs that read the website and return JSON. Which one fits depends on whether you need ads outside Europe and whether you need impression counts.
 
 ## The options at a glance
 
@@ -21,7 +21,7 @@ Google does not offer an official API for the Google Ads Transparency Center (ad
 Google publishes two tables as the public dataset `bigquery-public-data.google_ads_transparency_center`, and also as JSON files you can download (the README is at `storage.googleapis.com/ads-transparency-center/api-data/README.txt`). Both are under Google's Terms of Service and the Ads Transparency Center Additional Terms.
 
 - **`creative_stats`**: one row per ad. Columns include `advertiser_id`, `advertiser_disclosed_name`, `advertiser_legal_name`, `advertiser_location`, `advertiser_verification_status`, `creative_id`, `creative_page_url`, `ad_format_type`, `topic`, `ad_funded_by`, `is_funded_by_google_ad_grants`, a nested `region_stats` record (region code, `first_shown`, `last_shown`, `times_shown_lower_bound` and `times_shown_upper_bound`) and `audience_selection_approach_info` (whether demographics, location, contextual signals, customer lists or topics of interest were used to target the ad).
-- **`removed_creative_stats`**: ads Google removed, with a `disapproval` record holding the violated policy, the violation category, the removal location and whether the decision came from a Google investigation or a legal notice.
+- **`removed_creative_stats`**: ads Google removed in the EEA, with a `disapproval` record holding the violated policy, the violation category, the removal location and whether the decision came from a Google investigation or a legal notice.
 
 The catch is coverage. `region_stats` lists only the regions in the EEA and Turkey where the ad served, because the dataset exists for the EU's Digital Services Act reporting. An ad that ran only in the US or Japan is not in it. Dates are also floored: an ad first shown before 1 March 2023 reports 1 March 2023 as `first_shown`.
 
@@ -45,7 +45,7 @@ ORDER BY r.last_shown DESC
 LIMIT 100;
 ```
 
-The table is large, so select only the columns you need: BigQuery bills by the bytes each query scans, and `SELECT *` on this table uses up a free allowance quickly. Check the Schema tab in the console for the full column list before you write longer queries. Users on Google's developer forum have reported that the dataset can show fewer ads for an advertiser than the website does, so spot-check a few advertisers against the site.
+The table is large, so select only the columns you need: BigQuery bills by the bytes each query scans, and `SELECT *` on this table uses up a free allowance quickly. Check the Schema tab in the console for the full column list before you write longer queries. Before relying on the counts, spot-check a few advertisers against the website.
 
 For political ads, use the separate dataset `bigquery-public-data.google_political_ads`, which backs Google's Political Advertising transparency report and includes spend ranges. It holds election ads only.
 
@@ -59,7 +59,7 @@ It is fine for looking at a few competitors. It does not scale: there is no expo
 
 Several services read the public website and return the results as JSON, which is what most people searching for an "API" end up using. SerpApi and SearchApi both offer a Google Ads Transparency Center engine billed per search on their own plans. On the Apify Store, Actors do the same and bill per result.
 
-Disclosure: Data Gleaner is us. Our **Google Ads Transparency Scraper** takes advertiser IDs, domains or company names and returns one row per ad: advertiser ID and name, creative ID, format (text, image or video), first and last shown dates, creative image URLs or a preview URL, the landing domain for domain searches, and the ad's Transparency Center link. With `includeDetails` on, it also fetches every creative variant and the regions where each ad ran, at one extra request per ad. Filters cover region (two-letter country code or `anywhere`), start and end date, and format. It needs no Google account. It costs $1.50 per 1,000 ads, so a test run capped at 10 ads is about $0.015, and you can set a maximum charge on any run.
+Disclosure: Data Gleaner is us. Our **Google Ads Transparency Scraper** takes advertiser IDs, domains or company names and returns one row per ad: advertiser ID and name, creative ID, format (text, image or video), first and last shown dates, creative image URLs or a preview URL, the landing domain for domain searches, and the ad's Transparency Center link. With `includeDetails` on, it also fetches every creative variant and the regions where each ad ran, at one extra request per ad and no extra charge. Filters cover region (two-letter country code or `anywhere`), start and end date, and format. It needs no Google account. It costs $1.50 per 1,000 ads, so a test run capped at 10 ads is about $0.015, and you can set a maximum charge on any run.
 
 It is not on the Apify Store yet. Until it is, see [apify.com/datagleaner](https://apify.com/datagleaner) for our listed Actors. <!-- TODO(store-link: google-ads-transparency-scraper) -->
 
@@ -89,13 +89,13 @@ What it does not return: impression ranges and audience-targeting categories (us
 
 - **Text ads are archived as images.** The Transparency Center stores most text and image ads as rendered images on `tpc.googlesyndication.com`, so no route gives you the headline and description as plain text. If you need the words, run OCR on the images. Video and some other formats are available only as Google's preview script for that creative.
 - **No spend for commercial ads.** Spend ranges exist only in the political ads data. Impressions exist only as lower and upper bounds, and only for the EEA and Turkey.
-- **Region and date matter.** An ad's first and last shown dates differ by region, and the website and scrapers return ads newest first, so filter by region and date before comparing counts.
+- **Region and date matter.** An ad's first and last shown dates differ by region, and the website does not list ads strictly by date, so filter by region and date before comparing counts.
 - **Unofficial means it can change.** Any route that reads the website depends on how Google serves it. Pace requests; Google throttles a single IP that sends many quickly.
 
 ## FAQ
 
 **Is there an official Google Ads Transparency Center API?**
-No. The Google Ads API does not cover it. The closest official source is the free BigQuery dataset `bigquery-public-data.google_ads_transparency_center`, which covers ads shown in the EEA and Turkey.
+Not a general one. The Google Ads API does not cover it. Google's only official machine-readable access for the public is the free BigQuery dataset `bigquery-public-data.google_ads_transparency_center` (also downloadable as JSON), which covers ads shown in the EEA and Turkey.
 
 **What is in the Google Ads Transparency Center BigQuery dataset?**
 Two tables: `creative_stats` (one row per ad, with advertiser, format, topic, first and last shown dates and impression ranges per region, and targeting categories) and `removed_creative_stats` (removed ads with the policy reason). It does not include creative images or ad text, and only covers the EEA and Turkey.
@@ -123,7 +123,7 @@ For ads shown in Europe, query the BigQuery dataset by `advertiser_disclosed_nam
       "name": "Is there an official Google Ads Transparency Center API?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. The Google Ads API does not cover it. The closest official source is the free BigQuery dataset bigquery-public-data.google_ads_transparency_center, which covers ads shown in the EEA and Turkey."
+        "text": "Not a general one. The Google Ads API does not cover it. Google's only official machine-readable access for the public is the free BigQuery dataset bigquery-public-data.google_ads_transparency_center (also downloadable as JSON), which covers ads shown in the EEA and Turkey."
       }
     },
     {

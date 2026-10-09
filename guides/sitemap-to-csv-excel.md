@@ -5,7 +5,7 @@ description: "Export sitemap URLs to Excel or CSV: a free Python script for site
 
 # How to export sitemap URLs to Excel or CSV
 
-To export sitemap URLs to Excel, the quickest free route is a short script that downloads the sitemap, reads every `<loc>` (and `<lastmod>`) value and writes a CSV, which Excel opens directly. Excel can also read a sitemap itself through Power Query (Data, Get Data, From Other Sources, From Web). Both work for a plain sitemap. The harder cases are what one-file online converters usually skip: sitemap index files that point to other sitemaps, compressed `.xml.gz` files, sites that only announce their sitemap in `robots.txt`, and lists of many domains. This guide covers those, plus a `lastmod` filter that turns the export into a content audit list.
+To export sitemap URLs to Excel, the quickest free route is a short script that downloads the sitemap, reads every `<loc>` (and `<lastmod>`) value and writes a CSV, which Excel opens directly. Excel can also read a sitemap itself through Power Query (Data, Get Data, From Other Sources, From Web). Both work for a plain sitemap. The harder cases are where simple methods break: sitemap index files that point to other sitemaps, compressed `.xml.gz` files, sites that only announce their sitemap in `robots.txt`, and lists of many domains. This guide covers those, plus a `lastmod` filter that turns the export into a content audit list.
 
 Disclosure: Data Gleaner, mentioned near the end as one option for bulk extraction, is us. Every other method on this page is free and needs no account.
 
@@ -181,7 +181,7 @@ For a plain `.xml` address, drop the `Unzipped` step and pass `Source` to `Xml.T
 
 ## Free online converters
 
-Web tools that convert a sitemap to CSV, such as [xmlfiles.com](https://www.xmlfiles.com/tools/sitemap-to-csv/) and [365i.co.uk](https://www.365i.co.uk/tools/post-sitemap-to-csv/), let you paste one sitemap address and download a CSV. They are the fastest answer for a single, small, plain sitemap. Before relying on one, check whether it follows a sitemap index, whether it opens `.xml.gz`, and whether it caps the number of URLs. They take one address at a time, so many domains means many pastes.
+Web tools that convert a sitemap to CSV, such as [xmlfiles.com](https://www.xmlfiles.com/tools/sitemap-to-csv/) and [365i.co.uk](https://www.365i.co.uk/tools/post-sitemap-to-csv/), let you paste one address and download a CSV; 365i also follows sitemap indexes and adds each page's title. They are the fastest answer for one site. Before relying on one, check whether it follows a sitemap index, whether it opens `.xml.gz`, and whether it caps the number of URLs. They take one address at a time, so many domains means many pastes.
 
 ## Many domains at once, hosted
 

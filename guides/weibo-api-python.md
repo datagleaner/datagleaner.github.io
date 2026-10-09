@@ -80,6 +80,8 @@ Limits of this route:
 - **Guests see one page of a timeline.** Asking for `page=2` with only a visitor cookie returns `ok: -100` again (login required). Going further needs a logged-in cookie from a real account, which ties your script to that account.
 - **Long posts are truncated.** When `isLongText` is true, fetch the full text from `https://m.weibo.cn/statuses/extend?id=<post id>`.
 - **Keyword search is capped.** Weibo serves roughly 25 pages of results per keyword (about 1,000 posts) however big the topic. In our test the m.weibo.cn search container returned an empty list to a visitor session, while the desktop site's `weibo.com/ajax/statuses/search` endpoint did return posts.
+- **Comments are open to guests, reposts are not.** The top-level comments under a post, hottest first, are readable with the visitor session; repost lists and follower lists need a logged-in one.
+- **Large counts are rounded.** On popular posts the like, repost and comment counts can come back capped (for example `1000000` for "100万+") rather than exact.
 - **The text needs cleaning.** Strip the HTML from `text` and convert dates to ISO 8601 yourself.
 - **It can change without notice.** These endpoints are undocumented. Keep the request rate low, cache what you fetch, and expect to fix the parser now and then.
 
@@ -89,16 +91,17 @@ If you would rather not write the requests yourself, these GitHub projects are t
 
 | Project | What it does | Needs a login cookie |
 |---|---|---|
-| [dataabc/weibo-crawler](https://github.com/dataabc/weibo-crawler) | Downloads users' posts, images and videos from m.weibo.cn into CSV, JSON or a database | Optional; without one you get what guests see |
+| [dataabc/weibo-crawler](https://github.com/dataabc/weibo-crawler) | Downloads users' posts, images and videos from m.weibo.cn into CSV, JSON or a database | Optional for user posts; required for keyword search and reposts |
+| [dataabc/weibo-search](https://github.com/dataabc/weibo-search) | Scrapy keyword search with date, region and type filters; splits a search into hour-by-hour windows to get past the per-search page cap | Yes, pasted into `settings.py` |
 | [dataabc/weiboSpider](https://github.com/dataabc/weiboSpider) | Crawls user timelines from the older weibo.cn site | Yes |
 | [nghuyong/WeiboSpider](https://github.com/nghuyong/WeiboSpider) | Scrapy project for users, posts, comments, reposts and keyword search | Yes |
 | [NanmiCoder/MediaCrawler](https://github.com/NanmiCoder/MediaCrawler) | Browser-based crawler for several Chinese platforms, Weibo included | Yes (you log in by QR code) |
 
-Check each project's license and recent commits before relying on it. A crawler that uses your own account cookie puts that account at risk if Weibo flags the traffic.
+To get a login cookie, sign in to weibo.com in Chrome, open DevTools, and copy the `Cookie` request header from any request to weibo.com. A crawl with it runs as your account, so a heavy crawl puts that account at risk of restrictions (many people use a secondary account, which needs a phone number that can receive Weibo's SMS), and cookies expire, so scheduled runs need someone to refresh them. Check each project's license and recent commits before relying on it.
 
 ## Route 3: a hosted Weibo API (pay per result)
 
-Disclosure: Data Gleaner is us. Our [Weibo Scraper](https://apify.com/datagleaner/weibo-scraper) on the Apify Store wraps route 2's guest session in a maintained API. You send keywords or user IDs and get clean JSON back: full text with the HTML removed (long posts expanded), ISO 8601 timestamps, like, repost and comment counts, images, video, the poster's region and the author. It needs no Weibo account, cookie or developer app, only an Apify account. It costs **$3 per 1,000 posts** ($0.003 per post), and you pay only for posts saved.
+Disclosure: Data Gleaner is us. Our [Weibo Scraper](https://apify.com/datagleaner/weibo-scraper) on the Apify Store wraps route 2's guest session in a maintained API. You send keywords, user IDs or post links and get clean JSON back: full text with the HTML removed (long posts expanded), ISO 8601 timestamps, like, repost and comment counts, images, video, the poster's region and the author. It needs no Weibo account, cookie or developer app, only an Apify account. It costs **$3 per 1,000 posts** ($0.003 per post), and you pay only for posts saved.
 
 ```python
 # pip install apify-client
@@ -119,9 +122,9 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
     print(f'{item.get("createdAt")}  likes={item.get("likesCount")}  @{author}  {text}')
 ```
 
-That run fetches at most 10 posts, so about $0.03. Other inputs: `userIds` (numeric IDs or profile URLs), `sinceDate` to skip older posts, `includeUserProfile` to add follower counts and bios, and `requestDelaySeconds` to slow the pace.
+That run fetches at most 10 posts, so about $0.03. Other inputs: `userIds` (numeric IDs or profile URLs), `postUrls` for single posts, `sinceDate` and `untilDate` to set a date range, `includeUserProfile` to add follower counts and bios, `includeComments` for top-level comments ($2 per 1,000 comments), `hotSearch` for the current 微博热搜 board ($2 per 1,000 rows), and `requestDelaySeconds` to slow the pace.
 
-It does not remove Weibo's own limits: keyword search still stops at about 1,000 posts per keyword, user timelines return only the latest page (about 10 posts), and comments, follower lists and the hot-search board are not included.
+It does not remove Weibo's own limits: keyword search still stops at about 1,000 posts per keyword (setting `sinceDate` and `untilDate` lets you run the same keyword over several older date ranges, each up to that cap), user timelines return only the latest page (about 10 posts), and follower lists are not included.
 
 ## Which route to choose
 
@@ -144,13 +147,16 @@ Use the official API if your app posts or reads on behalf of logged-in Weibo use
 
 **Can I search Weibo posts by keyword with the API?** Not with an ordinary developer app; search belongs to the higher access levels Weibo grants on application. In practice people search through the website's own endpoints, either directly or through a crawler or hosted scraper, all of which hit Weibo's cap of about 1,000 posts per keyword.
 
+**Do I need a Weibo account to get posts?** Not for the first page of a user's timeline, keyword search up to about 1,000 posts, or a post's top-level comments: the anonymous visitor cookie in the script above is enough. Full user histories and repost lists need a logged-in account's cookie.
+
+**Why does Weibo return `ok: -100`?** That response carries a sign-in URL and means the page you asked for is closed to visitors without a login, such as page 2 of a user's timeline. A fresh visitor cookie does not change it; only a logged-in session does.
+
 **Is there a Weibo API on GitHub?** There is no official one. GitHub hosts community SDKs for the Open Platform API and crawlers for the website, such as dataabc/weibo-crawler and nghuyong/WeiboSpider, listed in the table above.
 
 **Is it legal to collect Weibo data?** Public posts are still personal data. Follow Weibo's terms, keep your request rate low, and make sure your use meets the privacy laws that apply to you, such as GDPR or China's PIPL. This is not legal advice.
 
 ## Related guides
 
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
 - [Weibo scraper guide in Chinese (微博爬虫)](weibo-scraper-zh)
 - [Bilibili API in Python](bilibili-api-python)
 - [Web scraping for AI agents over MCP](web-scraping-for-ai-agents-mcp)
@@ -183,6 +189,22 @@ Use the official API if your app posts or reads on behalf of logged-in Weibo use
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Not with an ordinary developer app; search belongs to the higher access levels Weibo grants on application. In practice people search through the website's own endpoints, either directly or through a crawler or hosted scraper, all of which hit Weibo's cap of about 1,000 posts per keyword."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Weibo account to get posts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for the first page of a user's timeline, keyword search up to about 1,000 posts, or a post's top-level comments: the anonymous visitor cookie in the script above is enough. Full user histories and repost lists need a logged-in account's cookie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Weibo return ok: -100?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That response carries a sign-in URL and means the page you asked for is closed to visitors without a login, such as page 2 of a user's timeline. A fresh visitor cookie does not change it; only a logged-in session does."
       }
     },
     {

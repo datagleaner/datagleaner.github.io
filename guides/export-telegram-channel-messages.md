@@ -29,11 +29,12 @@ The export lives only in the desktop app (Windows, macOS, Linux) from telegram.o
 5. Choose the format:
    - **HTML** gives readable pages that look like the chat, good for archiving or reading offline.
    - **Machine-readable JSON** gives one `result.json` file with every message, its date, text, sender, and links to the exported media files. Use this if you want to analyse the messages.
-6. Optionally set a date range with the **From** and **To** fields, pick a download folder, then click **Export**.
+6. Optionally set a date range (by default the export runs from the first message to the present), pick a download folder, then click **Export**.
 
 Caveats:
 
 - A channel whose owner turned on **Restrict saving content** cannot be exported; the app refuses the export for protected chats.
+- If you signed in to Telegram Desktop recently, Telegram may hold the export for 24 hours for security, or ask you to confirm it from another device where you are signed in. Click Export again once it allows it.
 - Large channels with media take a long time and a lot of disk space. Export text first and add media only if you need it.
 - To export everything in your account at once (all chats, contacts and so on), use **Settings > Advanced > Export Telegram data** instead.
 - JSON text is not always a plain string: formatted messages come as a list of pieces (plain text, bold, links). Join them when you process the file.

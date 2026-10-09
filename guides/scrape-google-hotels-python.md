@@ -216,7 +216,7 @@ for hotel in client.dataset(run.default_dataset_id).iterate_items():
         print("   ", offer["provider"], offer["pricePerNight"], offer["totalPrice"])
 ```
 
-The input fields are `locations` (free text such as `Paris 8e` or `hostels in Berlin`), `hotelUrls` (Google Hotels hotel URLs or an `entityId` from an earlier run), `checkIn` and `checkOut` (`YYYY-MM-DD`), `adults` (1 to 8), `currency`, `maxHotelsPerLocation` (default 20, up to 1,000), `includeDetails` (default on; off gives a faster list with only the lowest price), `minRating`, `hotelClass`, `minPrice`, `maxPrice`, `language`, `countryCode`, `requestDelaySecs` and `proxyConfiguration`. Filters are applied before the details request, and hotels skipped by a filter are not charged.
+The input fields are `locations` (free text such as `Paris 8e` or `hostels in Berlin`), `hotelUrls` (Google Hotels hotel URLs or an `entityId` from an earlier run), `checkIn` and `checkOut` (`YYYY-MM-DD`), `adults` (1 to 8), `currency`, `maxHotelsPerLocation` (default 20, up to 1,000), `includeDetails` (default on; off gives a faster list with only the lowest price), `minRating`, `hotelClass`, `minPrice`, `maxPrice`, `sortBy` (`lowestPrice`, `highestRating` or `mostReviewed`, which ranks a wider pool of the area's hotels rather than only the first page), `language`, `countryCode`, `requestDelaySecs` and `proxyConfiguration`. Filters are applied before the details request, and hotels skipped by a filter are not charged.
 
 This is one record, shortened, from a Paris search (two offers shown):
 

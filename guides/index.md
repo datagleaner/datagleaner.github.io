@@ -9,7 +9,6 @@ Practical answers to data questions. Each guide covers the free and do-it-yourse
 
 ## Chinese platforms
 
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
 - [Weibo API in Python: official API, m.weibo.cn and options](weibo-api-python)
 - [Weibo brand monitoring: a low-cost social listening setup](weibo-brand-monitoring)
 - [微博爬虫 Python 教程](weibo-scraper-zh)
@@ -38,7 +37,6 @@ Practical answers to data questions. Each guide covers the free and do-it-yourse
 
 ## Emails and contacts
 
-- [How to find email addresses from a list of websites](find-email-addresses-from-list-of-websites)
 - [How to extract emails from a website for free](extract-emails-from-website-free)
 - [How to extract phone numbers from a list of websites](extract-phone-numbers-from-websites)
 - [Google Sheets: extract email from a website URL](google-sheets-extract-email-from-website-url)

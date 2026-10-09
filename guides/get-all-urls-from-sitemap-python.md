@@ -172,6 +172,7 @@ with open("urls.csv", "w", newline="", encoding="utf-8") as f:
 |---|---|---|---|
 | Script above (`requests` + `xml.etree`) | Full control, one or a few sites | Free | No extra libraries; you maintain it |
 | `ultimate-sitemap-parser` (`pip install ultimate-sitemap-parser`) | Python users who want a library | Free | `from usp.tree import sitemap_tree_for_homepage`, then `tree.all_pages()`; handles indexes, gzip, robots.txt |
+| `getsitemap` (`pip install getsitemap`) | One call for a whole domain | Free | `getsitemap.retrieve_sitemap_urls("https://example.com")` checks robots.txt and `/sitemap.xml` and follows nested sitemaps |
 | `advertools` (`pip install advertools`) | SEO work in pandas | Free | `adv.sitemap_to_df("https://example.com/robots.txt")` returns a DataFrame with `loc`, `lastmod` and the source sitemap |
 | `pandas.read_xml` | A single, simple sitemap file | Free | Default parser needs `lxml`; pass the sitemap namespace; does not follow sitemap indexes |
 | Open the sitemap in a browser | A quick look at a small site | Free | Visit `/robots.txt` or `/sitemap.xml` and read the `<loc>` lines; impractical past a few hundred URLs |
@@ -235,7 +236,7 @@ Yes. Open the sitemap in your browser for a small site, use an online sitemap UR
 
 - [Convert a website to Markdown for an LLM](convert-website-to-markdown-for-llm): fetch the pages once you have their URLs.
 - [How to find the sitemap of a website](find-sitemap-of-website): when robots.txt and /sitemap.xml come up empty.
-- [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites)
+- [Find email addresses from a list of websites](../contact-and-lead-scrapers)
 - [Web content scrapers](../web-content-scrapers)
 
 <!-- jsonld:auto -->

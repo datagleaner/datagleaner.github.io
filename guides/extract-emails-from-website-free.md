@@ -5,7 +5,7 @@ description: Extract emails from a website for free with view source, a browser 
 
 # How to extract emails from a website for free
 
-To extract emails from a website for free, open the site's contact, about and legal-notice pages, press Ctrl+U (Cmd+Option+U on a Mac) to view the source, and search for `@` and `mailto:`. That finds every address written in the page's HTML. For more than a few pages, paste a one-line snippet into the browser console, use a free Chrome extension, spend the free monthly credits of an email finder such as Hunter or Snov.io, or run the 20-line Python script below. All five cost nothing; which one fits depends on how many pages you need to read and whether you need a named person's address or just the company inbox.
+To extract emails from a website for free, open the site's contact, about and legal-notice pages, press Ctrl+U (Cmd+Option+U on a Mac) to view the source, and search for `@` and `mailto:`. That finds every address written in the page's HTML. For more than a few pages, paste a one-line snippet into the browser console, use a free online extractor or Chrome extension, spend the free monthly credits of an email finder such as Hunter or Snov.io, or run the short Python script below. All five cost nothing; which one fits depends on how many pages you need to read and whether you need a named person's address or just the company inbox.
 
 Disclosure: Data Gleaner, mentioned near the end, is us. Every method before that works without our product.
 
@@ -15,7 +15,7 @@ Disclosure: Data Gleaner, mentioned near the end, is us. Every method before tha
 |---|---|---|---|
 | View source and search | Addresses in the HTML of the page you open | None | One site, a handful of pages |
 | Browser console snippet | Addresses in the page as rendered, including script-inserted text | None | The page you are on, copied as a clean list |
-| Chrome extension | Addresses on the pages you visit | Varies; some free tiers hide results or block export | Collecting while you browse |
+| Online extractor or Chrome extension | Addresses on the pages it fetches or you visit | Varies; some free tiers hide results or block export | No setup, or collecting while you browse |
 | Hunter or Snov.io free plan | Addresses from their database, plus pattern guesses, with verification | 50 credits a month each (October 2026) | A specific person's address at a company |
 | Python script | Addresses on the home page and common contact paths | None | Repeating the job, or reading several pages at once |
 
@@ -44,9 +44,11 @@ copy([...new Set(
 
 The unique addresses are now on your clipboard, one per line. Chrome may ask you to type "allow pasting" the first time you paste into the console; that warning exists because pasted code can act on the page, so read any snippet before you run it. This one only reads the page and writes to your clipboard.
 
-## 3. Use a free Chrome extension
+## 3. Use a free online extractor or Chrome extension
 
-Search the Chrome Web Store for "email extractor" and you will find several that collect addresses from each page you visit. Before you install one, check three things on its listing:
+Free web tools such as [Mailmeteor's Email Extractor](https://mailmeteor.com/tools/email-extractor) take a URL, follow the site's internal links and list the addresses they find, with no sign-up. Paste the home page URL, run it, and copy the list. They do not verify the addresses, and they find nothing on a site that offers only a contact form.
+
+For extensions, search the Chrome Web Store for "email extractor" and you will find several that collect addresses from each page you visit. Before you install one, check three things on its listing:
 
 - **What the free tier really allows.** Some show only the last few addresses found, or charge for export.
 - **Which permissions it asks for.** An extension that can "read and change all your data on all websites" sees everything you browse, not only the sites you scrape. Prefer one with a clear privacy policy, and remove it when you are done.

@@ -48,7 +48,7 @@ Several SEEK scrapers are listed on the Apify Store, each billed per result thro
 
 Disclosure: SEEK Jobs Scraper is ours (Data Gleaner).
 
-**SEEK Jobs Scraper** (`seek-jobs-scraper`) searches seek.com.au or seek.co.nz by keyword and location, or takes SEEK search URLs you paste in. It can filter by category, work type, on-site/hybrid/remote, salary range and date listed, and returns one record per job with the full description. It runs over plain HTTP, with no browser and no SEEK account. It costs **$0.80 per 1,000 jobs** ($0.0008 per job), full descriptions included, billed only for jobs returned. It is not listed on the Apify Store yet; it will appear on the [Data Gleaner Apify page](https://apify.com/datagleaner).
+**SEEK Jobs Scraper** (`seek-jobs-scraper`) searches seek.com.au or seek.co.nz by keyword and location, or takes SEEK search URLs you paste in. It can filter by category, work type, on-site/hybrid/remote, salary range and date listed, and returns one record per job with the full description, plus the applicant count and any emails or phone numbers written into the ad when SEEK shows them. It runs over plain HTTP, with no browser and no SEEK account. It costs **$0.80 per 1,000 jobs** ($0.0008 per job), full descriptions included, billed only for jobs returned. It is not listed on the Apify Store yet; it will appear on the [Data Gleaner Apify page](https://apify.com/datagleaner).
 <!-- TODO(store-link: seek-jobs-scraper) -->
 
 Once it is listed, this is how you would call it from Python:
@@ -86,6 +86,7 @@ Ten jobs cost under one cent. The main input fields are:
 | `keywords` | One search per keyword, for example `nurse` or `data analyst`. |
 | `country` | `AU` (seek.com.au, the default) or `NZ` (seek.co.nz). |
 | `location` | A place as SEEK writes it: `All Sydney NSW`, `Melbourne VIC 3000`, `Auckland`, `Remote`. Default is the whole country. A place SEEK does not recognise returns no jobs. |
+| `locations` | Several places in one run, one search per keyword and place, for example `["Sydney NSW", "Melbourne VIC"]`. Overrides `location`. |
 | `startUrls` | SEEK search result URLs; the keyword, location and filters are read from the URL. |
 | `workType` | Any of `fullTime`, `partTime`, `contract`, `casual`. |
 | `workArrangement` | Any of `onSite`, `hybrid`, `remote`. |
@@ -94,7 +95,8 @@ Ten jobs cost under one cent. The main input fields are:
 | `salaryMin`, `salaryMax`, `salaryType` | SEEK's own salary filter, `annual`, `monthly` or `hourly`. It also keeps ads that show no salary. |
 | `sortBy` | `relevance` or `date`. |
 | `maxJobsPerSearch` | Cap per keyword or URL, default 100, maximum 500. This is also your cost cap. |
-| `includeDetails` | Full description, expiry date and screening questions. On by default, same price either way. |
+| `includeKeywords`, `excludeKeywords` | Keep only jobs whose title, company, teaser or description mention one of these terms, or drop jobs that do. Dropped jobs are not charged. |
+| `includeDetails` | Full description, expiry date, screening questions, applicant count and contacts written into the ad. On by default, same price either way. |
 
 ## Fields returned
 
@@ -114,7 +116,7 @@ One record per job ad. This is an illustrative record, shortened:
   "classification": "Healthcare & Medical",
   "subClassification": "Nursing - General Medical & Surgical",
   "workType": "Part time",
-  "workArrangement": "on-site",
+  "workArrangement": "onSite",
   "salaryLabel": "$45 – $50 per hour",
   "salaryMin": 45,
   "salaryMax": 50,
@@ -126,20 +128,23 @@ One record per job ad. This is an illustrative record, shortened:
   "teaser": "Part-time role with career growth.",
   "descriptionText": "About the role\n...",
   "applicationQuestions": ["How many years' experience do you have as a nurse?"],
+  "applicantCount": 3,
+  "applicantVolumeLabel": "Low application volume",
+  "extractedEmails": ["recruiter@example.com"],
   "searchKeywords": "nurse",
   "country": "AU",
   "scrapedAt": "2026-10-09T05:00:00+00:00"
 }
 ```
 
-Records also carry `advertiserId`, `advertiserName`, `descriptionHtml`, `isFeatured`, `isPromoted` and the search that found them. Fields SEEK does not publish for a job are `null`: many ads show no salary, and private advertisers hide the company name. `salaryMin` and `salaryMax` are filled only when the salary text holds exactly one amount or range, so "Competitive" gives `null`. Applicant counts and apply links are not in the data.
+Records also carry `advertiserId`, `advertiserName`, `descriptionHtml`, `isFeatured`, `isPromoted`, the share of applicants who attached a resume or cover letter, phone numbers and links from the ad, and the search that found them. Fields SEEK does not publish for a job are `null`: many ads show no salary, and private advertisers hide the company name. `salaryMin` and `salaryMax` are filled only when the salary text holds exactly one amount or range, so "Competitive" gives `null`. Applicant counts appear only on ads where SEEK shows them, and apply links are not in the data; the job `url` opens the ad.
 
 ## Using SEEK data for labour-market research
 
 Job ads are a fast, fine-grained signal of hiring demand, but they are not a census of vacancies. A few practices make the numbers hold up:
 
 - **Track flow, not stock.** Run the same searches daily with `dateRange` set to `1` (last 24 hours) and store the results. Counting new ads per day by role, city or category gives you a demand series; deduplicate on `jobId` across days.
-- **Split searches to stay under the cap.** SEEK serves at most about 500 results per search. For a broad query, split by state, category, work type or date range rather than relying on one search.
+- **Split searches to stay under the cap.** SEEK serves at most about 500 results per search. For a broad query, split by state (`locations`), sub-category, work type or date range rather than relying on one search.
 - **Treat salary data as advertised, not paid.** Only part of the ads show a salary, the period varies (hour, year), and ads with a salary may differ from those without. Normalise to one period and report how many ads had a parseable range.
 - **Read skills from the description.** `descriptionText` lets you count mentions of tools or qualifications (for example "SQL", "AHPRA registration") by city or over time.
 - **Watch for repeats and agencies.** Recruitment agencies and large employers may post the same role in several locations. Group by title, advertiser and description before counting roles.

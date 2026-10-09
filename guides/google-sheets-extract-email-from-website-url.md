@@ -15,13 +15,9 @@ Drag it down the column and each row shows the first email the page links to. It
 
 Disclosure: Data Gleaner, mentioned near the end as one option for bulk runs, is us. Every other method on this page is free and needs no account beyond Google.
 
-## Why most Google Sheets email guides do not answer this
-
-Many guides for this question show how to pull an address out of text that is already in a cell, using `REGEXEXTRACT` on a pasted paragraph. That is a different job. Here the cell holds only a URL, so the sheet has to fetch the page first. In Google Sheets the function that fetches a web page is `IMPORTXML` (or `IMPORTHTML` and `IMPORTDATA` for tables and CSV files), and everything below builds on it.
-
 ## 1. The IMPORTXML + REGEXEXTRACT formula
 
-`IMPORTXML(url, xpath_query)` downloads the page at `url` and returns whatever the XPath query selects. For emails, the most reliable target is the `mailto:` link, because it is the form most sites use for a clickable address:
+`REGEXEXTRACT` alone cannot do this, because a cell holding a URL holds no page text; the sheet has to fetch the page first. `IMPORTXML(url, xpath_query)` downloads the page at `url` and returns whatever the XPath query selects. For emails, the most reliable target is the `mailto:` link, because it is the form most sites use for a clickable address:
 
 ```
 =IMPORTXML(A2, "//a[starts-with(@href,'mailto:')]/@href")
@@ -153,7 +149,7 @@ What it does, from its documentation:
 
 - For each website it fetches the home page, then the pages most likely to hold contact details: contact, about, impressum or legal notice, team, company profile and footer links, with equivalents in Japanese, Chinese, German, French, Spanish and Italian.
 - Finds emails in `mailto:` links, plain text, obfuscated forms such as `name [at] domain [dot] com` and `name(at)domain.com`, Cloudflare email protection and JSON-LD.
-- Also returns phone numbers normalized to E.164, social profiles (LinkedIn, X, Facebook, Instagram, YouTube, TikTok, GitHub), contact forms and schema.org addresses.
+- Also returns phone numbers normalized to E.164, social profiles on 14 platforms (LinkedIn, X, Facebook, Instagram, YouTube, TikTok, GitHub and others), contact forms and schema.org addresses.
 - Returns one row per website, with the page each value was found on. Emails on other domains are kept apart in `otherEmails`, so `emails` holds the site's own addresses.
 - Costs US$4.00 per 1,000 websites with contacts (US$0.004 each). You are charged only for sites that return at least one contact; unreachable sites and sites with no contacts are free.
 
@@ -192,7 +188,7 @@ Paste the contents of your URL column into `websites` (full URLs or bare domains
 
 There are two routes:
 
-1. **CSV.** In the Apify Console, open the run's Output tab and export the dataset as CSV. In Google Sheets choose File, Import, Upload, and pick "Insert new sheet". Then match rows to your original list with `VLOOKUP` or `XLOOKUP` on the website column. The `website` value is the input as you typed it, so keep your sheet's URL column in the same form you gave the Actor.
+1. **CSV.** In the Apify Console, open the run's Output tab and export the dataset as CSV. For a spreadsheet, the flat columns are the ones to keep: `emailList` (the site's own addresses as plain strings), `phoneList`, `domain` and `status`. In Google Sheets choose File, Import, Upload, and pick "Insert new sheet". Then match rows to your original list with `VLOOKUP` or `XLOOKUP` on the website column. The `website` value is the input as you typed it, so keep your sheet's URL column in the same form you gave the Actor.
 2. **An Apify integration.** In the Integrations tab of the Actor or a saved task, you can attach another Actor that runs when this one finishes, such as a Google Sheets export Actor from the Apify Store, so the dataset is written to a spreadsheet automatically. Follow that Actor's own setup steps; its options are not part of this scraper.
 
 If you only need to try it, a run of a few sites costs a fraction of a cent, which Apify's free plan credit covers.
@@ -217,7 +213,7 @@ Reading publicly published pages is technically simple, but what you do with the
 ## Related guides
 
 - [How to extract emails from a website for free](extract-emails-from-website-free): five free methods, from view source to a browser console snippet.
-- [Find emails from a list of websites](find-email-addresses-from-list-of-websites): the bulk version of this task, with no spreadsheet formulas.
+- [Find emails from a list of websites](../contact-and-lead-scrapers): the bulk version of this task, with no spreadsheet formulas.
 - [Get all URLs from a sitemap in Python](get-all-urls-from-sitemap-python): build the list of pages to check before you extract.
 
 <!-- jsonld:auto -->

@@ -55,12 +55,10 @@ function appendPrices() {
   const hotels = JSON.parse(res.getContentText());
   const now = new Date();
   const rows = hotels.map(function (h) {
-    const offers = (h.offers || []).filter(function (o) { return o.pricePerNight != null; });
-    offers.sort(function (a, b) { return a.pricePerNight - b.pricePerNight; });
     return [
       now, h.name, h.checkIn, h.checkOut, h.currency,
       h.lowestPrice == null ? "" : h.lowestPrice,
-      offers.length ? offers[0].provider : "",
+      h.cheapestProvider || "",
       h.rating == null ? "" : h.rating,
     ];
   });
@@ -83,7 +81,7 @@ Things to know: the token is a password, so keep it in script properties and not
 `IMPORTDATA(url)` imports a `.csv` or `.tsv` file from a URL into a sheet, according to Google's documentation, and the URL can sit in a cell. Apify can return a dataset as CSV with `format=csv`, and a `fields` list keeps only the columns you ask for. Apify also has a shortcut to the dataset of an Actor's most recent run, so the URL does not change from day to day:
 
 ```
-https://api.apify.com/v2/actors/datagleaner~google-hotels-scraper/runs/last/dataset/items?format=csv&fields=name,checkIn,checkOut,currency,lowestPrice,rating,scrapedAt&clean=1&status=SUCCEEDED&token=YOUR_APIFY_TOKEN
+https://api.apify.com/v2/actors/datagleaner~google-hotels-scraper/runs/last/dataset/items?format=csv&fields=name,checkIn,checkOut,currency,lowestPrice,cheapestProvider,rating,scrapedAt&clean=1&status=SUCCEEDED&token=YOUR_APIFY_TOKEN
 ```
 
 Put that URL in a cell, for example `A1`, and in `A3` write `=IMPORTDATA(A1)`. Schedule the Actor in Apify (see Method 3) so a fresh run exists, and the sheet shows the latest hotels.
@@ -92,8 +90,8 @@ Limits you should plan around:
 
 - **No history.** The cells show the last run, and the next run replaces them. To keep a record you must copy the values somewhere, or use Method 1.
 - **The token sits in the URL.** Anyone who can open the sheet can read the cell and use your token. Share such a sheet only with people you would trust with the token.
-- **Choose flat fields.** Each hotel record also holds an `offers` list. A CSV is a flat table, so list the plain fields you need in `fields`, and use Method 1 for the cheapest provider.
-- **Refresh timing is Google's.** The Google page I checked does not state how often `IMPORTDATA` refreshes.
+- **Choose flat fields.** Each hotel record also holds a nested `offers` list, which does not fit a flat CSV. List the plain fields you need in `fields`; the cheapest booking site is already a plain field, `cheapestProvider`.
+- **Refresh timing is Google's.** Google does not document how often `IMPORTDATA` re-fetches, so you cannot set the time of day. Method 1 runs when you choose.
 
 ## Method 3: Apify's scheduler plus a Google Sheets Actor
 
@@ -123,7 +121,7 @@ A hotel name with an apostrophe breaks the query string above. Adjust the column
 
 ## The Data Gleaner Actor
 
-[Google Hotels Scraper](https://apify.com/datagleaner/google-hotels-scraper) is our Apify Actor. It reads Google Hotels over plain HTTP, with no browser, login or Google account, and returns one record per hotel: the lowest price for your dates, every booking site's per-night and total price with a link, rating, review count, star class, coordinates and a `scrapedAt` timestamp. Its proxy setting is off by default.
+[Google Hotels Scraper](https://apify.com/datagleaner/google-hotels-scraper) is our Apify Actor. It reads Google Hotels over plain HTTP, with no browser, login or Google account, and returns one record per hotel: the lowest price for your dates, the cheapest booking site (`cheapestProvider`), every booking site's per-night and total price with a link, rating, review count, star class, coordinates and a `scrapedAt` timestamp. Its proxy setting is off by default.
 
 It costs **$3.00 per 1,000 hotels** ($0.003 per hotel), billed only for hotels pushed to the dataset. Tracking 20 hotels once a day for 30 days is 600 hotels, or $1.80. A 10-hotel test run costs $0.03. You also need a free Apify account and its API token.
 
@@ -151,9 +149,7 @@ if run is None:
     raise SystemExit("[ERROR] The Actor run did not return.")
 
 for hotel in client.dataset(run.default_dataset_id).iterate_items():
-    offers = [o for o in hotel.get("offers", []) if o.get("pricePerNight") is not None]
-    cheapest = min(offers, key=lambda o: o["pricePerNight"])["provider"] if offers else ""
-    print(hotel["scrapedAt"], hotel["name"], hotel.get("lowestPrice"), hotel.get("currency"), cheapest)
+    print(hotel["scrapedAt"], hotel["name"], hotel.get("lowestPrice"), hotel.get("currency"), hotel.get("cheapestProvider"))
 ```
 
 Limits: Google lists around 500 distinct hotels per query at most, prices differ by market (set `countryCode`), dates must be today or later, and at very high volume Google may start refusing requests, in which case you can enable `proxyConfiguration`. Reviews and room types are not included.
@@ -173,7 +169,7 @@ No. The methods here run on Google's and Apify's servers on a schedule, so the s
 Google Sheets and Apps Script are free to use within Google's quotas. The prices come from the scraper, which costs $0.003 per hotel with Data Gleaner's Actor, so 20 hotels once a day for 30 days is $1.80. The Google Sheets Actor in Method 3 adds its own Apify platform usage.
 
 **How do I find the cheapest booking site for each hotel?**
-Each hotel record has an `offers` list with a provider name and a price per night for every booking site Google shows. Sort the list by `pricePerNight` and take the first entry, as the script above does, and write its provider name in a column next to the lowest price.
+Read the `cheapestProvider` field, which names the booking site with the lowest price for your dates, and write it in a column next to `lowestPrice`, as the script above does. For the full comparison, each record's `offers` list has every booking site Google shows with its per-night price, total price and link; it needs `includeDetails` on, which is the default.
 
 **Why did my sheet stop updating?**
 The usual cause is a check-in date that has passed, because Google no longer prices a stay in the past. Other causes are an expired or wrong token, a synchronous call that ran past 300 seconds, or a disabled Apify schedule. The error in the Apps Script execution log or the Apify run log says which.
@@ -227,7 +223,7 @@ The usual cause is a check-in date that has passed, because Google no longer pri
       "name": "How do I find the cheapest booking site for each hotel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Each hotel record has an offers list with a provider name and a price per night for every booking site Google shows. Sort the list by pricePerNight and take the first entry, as the script above does, and write its provider name in a column next to the lowest price."
+        "text": "Read the cheapestProvider field, which names the booking site with the lowest price for your dates, and write it in a column next to lowestPrice, as the script above does. For the full comparison, each record's offers list has every booking site Google shows with its per-night price, total price and link; it needs includeDetails on, which is the default."
       }
     },
     {

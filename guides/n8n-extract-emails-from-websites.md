@@ -131,7 +131,7 @@ Make a sheet with a header row and these columns: `website`, `emails`, `phones`,
 
 ### The workflow
 
-The Actor is [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper) on the Apify Store. From its documentation, for each website it fetches the home page and the pages most likely to hold contact details (contact, about, impressum / legal notice, team, company profile and footer links, including Japanese, Chinese, German, French, Spanish and Italian names), on the same domain only, up to `maxPagesPerSite` pages (8 by default, 30 at most). It respects `robots.txt` by default. It returns emails (including obfuscated forms and Cloudflare email protection), phone numbers validated with libphonenumber and normalized to E.164, social profiles, contact forms, schema.org addresses and the company name, as one item per website, each value with the page it was found on.
+The Actor is [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper) on the Apify Store. From its documentation, for each website it fetches the home page and the pages most likely to hold contact details (contact, about, impressum / legal notice, team, company profile and footer links, including Japanese, Chinese, German, French, Spanish and Italian names), on the same site only (plus a subdomain when a link clearly names a contact page), up to `maxPagesPerSite` pages (8 by default, 30 at most). It respects `robots.txt` by default. It returns emails (including obfuscated forms and Cloudflare email protection), phone numbers validated with libphonenumber and normalized to E.164, social profiles, contact forms, schema.org addresses and the company name, as one item per website, each value with the page it was found on.
 
 The JSON below has four nodes: Manual Trigger, Google Sheets "Get Row(s)", HTTP Request, and Google Sheets "Append or Update Row" matching on the `website` column. The HTTP Request node sends `{"websites": ["<the row's site>"], "maxPagesPerSite": 8}` and receives that site's result. The Google Sheets step maps the result onto your columns with plain n8n expressions (`.map(...).join(', ')`), not a Code node.
 
@@ -255,7 +255,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 
 ### Price and limits
 
-The price is US$4.00 per 1,000 websites that return at least one contact (any email, phone, social profile, contact form or address). Unreachable sites and sites with no contacts are free. The Actor's own example: 5,000 websites, of which about 70% return a contact, costs 3,500 x $0.004 = $14.00.
+The price is US$4.00 per 1,000 websites that return at least one contact (any email, phone, contact form or address on the site, or one of its own social profiles; addresses on other domains do not count). Unreachable sites and sites with no contacts are free. The Actor's own example: 5,000 websites, of which about 70% return a contact, costs 3,500 x $0.004 = $14.00.
 
 Its limits, from its documentation: it uses plain HTTP with no browser, so details injected only by scripts, and sites that block non-browser clients (HTTP 403 or 429), are not found. Emails and phones shown as images are not read. Text addresses are not parsed, only schema.org addresses. Each item has a `status` of `ok`, `noContacts`, `unreachable`, `blockedByRobots`, `invalidUrl` or `error`, which the workflow writes to the `status` column so you can see why a row is empty.
 
@@ -282,7 +282,7 @@ It depends on where you and the people you contact are and on what you do with t
 ## Related guides
 
 - [Google Sheets: extract email from a website URL](google-sheets-extract-email-from-website-url): the formula-only route inside a sheet, and where it stops.
-- [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites): the same job outside n8n, including obfuscated forms.
+- [Find email addresses from a list of websites](../contact-and-lead-scrapers): the same job outside n8n, including obfuscated forms.
 - [Extract phone numbers from a list of websites](extract-phone-numbers-from-websites): normalizing numbers to E.164 with libphonenumber.
 
 <!-- jsonld:auto -->

@@ -106,19 +106,20 @@ In short, as of late 2026 there is no reliable free tool that lists an account's
 
 ## 4. A hosted scraper: Data Gleaner WeChat Articles
 
-If you would rather not run scripts or keep a WeChat account, Data Gleaner's [WeChat Articles Scraper](https://apify.com/datagleaner) (`wechat-articles`) runs methods 1 and 2 as a hosted job on Apify. <!-- TODO(store-link: wechat-articles) --> It is not yet listed publicly on the Apify Store; the link goes to our store page, where it will appear. Disclosure: Data Gleaner is us.
+If you would rather not run scripts or keep a WeChat account, Data Gleaner's [WeChat Articles Scraper](https://apify.com/datagleaner) (`wechat-articles`) runs methods 1 and 2 as a hosted job on Apify. <!-- TODO(store-link: wechat-articles) --> It is not yet listed publicly on the Apify Store; the link goes to our store page, where it will appear.
 
 What it does, from its documentation:
 
 - Takes **article URLs**, **search keywords** (through Sogou WeChat search) and **account names**, in any mix. No WeChat login and no cookies.
-- Returns per article: title, account name, account ID (`gh_...`) and `__biz`, author, publish time (ISO 8601), digest, cover image, every image URL, and the body as text, Markdown and/or HTML. Download as JSON, CSV or Excel.
+- Returns per article: title, account name, account ID (`gh_...`), the account's `biz` value, a stable `articleId` (`biz_mid_idx`, the field to de-duplicate on because search links expire), author, publish time (ISO 8601), the 原创 (original) flag, the IP region shown under the title, digest, cover image, every image URL, and the body as text, Markdown and/or HTML. Download as JSON, CSV or Excel.
+- Takes `publishedWithin` (`day`, `week` or `month`) to keep only recent keyword and account results, and `maxArticles` (up to 100) per keyword or account.
 - Costs **$5 per 1,000 articles**. Failed or deleted articles are not charged.
 
 Its limits are the ones described above, because it uses the same public sources:
 
 - Keyword and account discovery stops at about 100 articles per query and finds recent articles only.
 - Account lookup is best effort: it keeps search results from an account with that name, so it cannot download an account's full history. Give links for full coverage.
-- Read and like counts are usually `null`, because anonymous pages do not show them.
+- Read and like counts are not in the output, because anonymous pages do not show them.
 - Deleted, restricted and some video or image-only posts have no body and are skipped.
 
 ```python

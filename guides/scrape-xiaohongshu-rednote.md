@@ -174,7 +174,7 @@ It depends on where you are, what you collect and what you do with it, and this 
 ## Related
 
 - [Weibo, Bilibili and Xiaohongshu scraper APIs compared](../chinese-social-media-scrapers)
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
+- [Weibo API in Python: get Weibo posts from Python](weibo-api-python)
 - [How to scrape Bilibili comments and danmaku](scrape-bilibili-comments-danmaku)
 
 <!-- jsonld:auto -->

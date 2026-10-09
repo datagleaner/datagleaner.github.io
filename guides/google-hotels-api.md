@@ -102,7 +102,7 @@ for hotel in client.dataset(run.default_dataset_id).iterate_items():
           f'{hotel.get("lowestPrice")} {hotel.get("currency")}/night | first offer: {cheapest}')
 ```
 
-The input fields are `locations` (free text such as `Paris 8e` or `hostels in Berlin`), `hotelUrls` (Google Hotels entity URLs or the `entityId` from an earlier run), `checkIn` and `checkOut` (`YYYY-MM-DD`), `adults` (1 to 8), `currency`, `maxHotelsPerLocation` (default 20, up to 1,000), `includeDetails` (default on; off gives a faster list with only the lowest price), `language` and `countryCode`.
+The input fields are `locations` (free text such as `Paris 8e` or `hostels in Berlin`), `hotelUrls` (Google Hotels entity URLs or the `entityId` from an earlier run), `checkIn` and `checkOut` (`YYYY-MM-DD`), `adults` (1 to 8), `currency`, `maxHotelsPerLocation` (default 20, up to 1,000), `includeDetails` (default on; off gives a faster list with only the lowest price), `language` and `countryCode`. Optional filters `minRating`, `hotelClass`, `minPrice`, `maxPrice` and `sortBy` (`lowestPrice`, `highestRating`, `mostReviewed`) narrow the list, and hotels a filter skips are not billed.
 
 ## The JSON you get back
 

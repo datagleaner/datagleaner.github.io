@@ -11,7 +11,7 @@ Disclosure: Data Gleaner, mentioned at the end as one option for bulk extraction
 
 ## Why one pass for every network
 
-Most tools you will find for this job handle one network at a time, such as a "website to LinkedIn" mapper or a single-network profile extractor. That is fine if you only need LinkedIn, but a company's home page already links to all of its profiles. Fetching the page once and sorting the links by network is cheaper than running a separate tool per network, and it makes the result a single row per company.
+Some tools for this job handle one network at a time, such as a "website to LinkedIn" mapper. That is fine if you only need LinkedIn, but a company's home page already links to all of its profiles. Fetching the page once and sorting the links by network is cheaper than running a separate lookup per network, and it makes the result a single row per company.
 
 ## Source 1: JSON-LD sameAs
 
@@ -209,10 +209,11 @@ Disclosure: Data Gleaner is us. The [Website Contact Details Scraper](https://ap
 
 What it does for this task:
 
-- Returns social profiles for LinkedIn, X (Twitter), Facebook, Instagram, YouTube, TikTok and GitHub, each with the page where it was found. Share buttons and post links are ignored.
+- Returns social profiles on 14 platforms (LinkedIn, X (Twitter), Facebook, Instagram, YouTube, TikTok, GitHub, Pinterest, Threads, Telegram, WhatsApp, Discord, Reddit and Snapchat), each with the page where it was found. Share buttons and post links are ignored.
+- Separates the company's own accounts (`socials`: linked from the header, footer or navigation, or matching the brand) from other people's profiles that the site merely links, such as testimonials, team members or press (`mentionedSocials`). This solves the "personal account or partner profile" problem the script above leaves to you.
 - Uses plain HTTP requests (no browser), reads up to `maxPagesPerSite` pages per site (8 by default, 30 at most), stays on the same domain and respects `robots.txt` by default.
 - Returns one row per input website with a `status` of `ok`, `noContacts`, `unreachable`, `blockedByRobots`, `invalidUrl` or `error`. Results export as CSV, Excel or JSON.
-- Costs US$4.00 per 1,000 websites with contacts (US$0.004 each). You are charged once per website that returns at least one contact, which can be an email, phone, social profile, contact form or address; unreachable sites and sites with no contacts are free. For 5,000 sites of which 3,500 return a contact, that is $14.00.
+- Costs US$4.00 per 1,000 websites with contacts (US$0.004 each). You are charged once per website that returns at least one contact, which can be an email, phone, contact form, address or one of the site's own social profiles (other people's profiles do not count); unreachable sites and sites with no contacts are free. For 5,000 sites of which 3,500 return a contact, that is $14.00.
 
 It shares the script's main limits: no JavaScript rendering, so details added only by scripts are not found, and sites that block non-browser clients (HTTP 403 or 429) are not read. It also does not return a social profile for every site, because some sites do not publish one.
 
@@ -238,7 +239,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
             print("  ", network, profile["url"], "(found on", profile["foundOn"] + ")")
 ```
 
-The `socials` object has one list per network (`linkedin`, `twitter`, `facebook`, `instagram`, `youtube`, `tiktok`, `github`), and each entry has a `url` and a `foundOn` field.
+The `socials` object has one list per network (`linkedin`, `twitter`, `facebook`, `instagram`, `youtube`, `tiktok`, `github`, `pinterest`, `threads`, `telegram`, `whatsapp`, `discord`, `reddit`, `snapchat`), and each entry has a `url` and a `foundOn` field. `mentionedSocials` has the same shape for profiles the site links that are not its own.
 
 ## FAQ
 
@@ -262,7 +263,7 @@ Then none are published in the HTML, or they are added by JavaScript after the p
 
 ## Related guides
 
-- [How to find email addresses from a list of websites](find-email-addresses-from-list-of-websites): the same list of domains, for emails instead of social profiles.
+- [How to find email addresses from a list of websites](../contact-and-lead-scrapers): the same list of domains, for emails instead of social profiles.
 - [How to extract emails from a website for free](extract-emails-from-website-free): free methods and a script for one site.
 - [How to find the sitemap of a website](find-sitemap-of-website): list the pages of a site before you scrape it.
 

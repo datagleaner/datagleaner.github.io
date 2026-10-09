@@ -48,7 +48,7 @@ Because the library is archived, expect this to break without warning at some po
 | Google Trends API (official) | Not published | Closed alpha, by application | Dozens, per Google | Long-term monitoring, if you are accepted |
 | trendspyg (open source) | Free | `pip install trendspyg` | 2 to 5 | A maintained drop-in for pytrends code; still rate-limited by Google |
 | SerpApi Google Trends API | Free plan with 250 searches a month; paid plans from $25 a month for 1,000 searches | API key | Up to 5 (interest over time) | Teams already on SerpApi for other Google data |
-| Google Trends Scraper on Apify (ours) | $1.50 per 1,000 results | Apify account and API token | Any number, rescaled to one scale | Large keyword lists, scheduled runs |
+| Google Trends Scraper on Apify (ours) | $1 per 1,000 results | Apify account and API token | Any number, rescaled to one scale | Large keyword lists, scheduled runs |
 
 ### Google's official Trends API (alpha)
 
@@ -56,7 +56,7 @@ Google announced an official [Google Trends API](https://developers.google.com/s
 
 ### trendspyg and other open-source libraries
 
-[trendspyg](https://github.com/flack0x/trendspyg) is a maintained open-source library on PyPI (version 1.9.0, October 2026) that describes itself as a pytrends alternative. It covers Trending Now, interest over time, related queries, interest by region and 2 to 5 keyword comparisons, and ships a pytrends-compatible `TrendReq` (`from trendspyg.compat.request import TrendReq`, installed with `pip install "trendspyg[analysis]"`), so existing code may need few changes; its documentation says `related_topics()` and `top_charts()` are not available that way. For Explore data it drives a real Chrome browser against the Trends website, so it needs Chrome installed and Google's rate limits still apply: its docs advise waiting after a rate-limit error.
+[trendspyg](https://github.com/flack0x/trendspyg) is a maintained open-source library on PyPI (version 1.9.0, October 2026) that describes itself as a pytrends alternative. It covers Trending Now, interest over time, related queries, interest by region and 2 to 5 keyword comparisons, and ships a pytrends-compatible `TrendReq` (`from trendspyg.compat.request import TrendReq`, installed with `pip install "trendspyg[analysis]"`), so existing code may need few changes; its documentation says `related_topics()` and `top_charts()` are not available that way. For Explore data its default engine drives a real Chrome browser against the Trends website; `engine="auto"` (what the compatibility `TrendReq` uses) asks Google directly first and starts Chrome only if Google refuses, and `engine="http"` never starts Chrome. Google's rate limits still apply: its docs say a rate-limit error means stop for a long while, not retry at once.
 
 ### SerpApi
 
@@ -118,7 +118,7 @@ What it does, from its README:
 - Adds summary columns next to each timeline: `average`, `peakValue`, `peakDate`, `latestValue`, `topRegion`, `topQuery`.
 - Needs no Google account or Google API key, only an Apify account.
 
-Pricing is $1.50 per 1,000 results, where a result is one dataset item per term, location and output type. For example, 40 terms in 2 countries with interest over time and related queries is 160 results, about $0.24. Speed is still bounded by Google's rate limits: in testing, a 40-term, 2-country, 3-output batch (264 requests) took about 14 minutes.
+Pricing is $1 per 1,000 results, where a result is one dataset item per term, location and output type. For example, 40 terms in 2 countries with interest over time and related queries is 160 results, about $0.16. Speed is still bounded by Google's rate limits: in testing, a 40-term, 2-country, 3-output batch (264 requests) took about 14 minutes.
 
 ```python
 # pip install apify-client
@@ -141,7 +141,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
     print(item.get("searchTerm"), item.get("average"), item.get("peakValue"), item.get("peakDate"))
 ```
 
-This input returns 5 results (one timeline per term), about $0.0075.
+This input returns 5 results (one timeline per term), about $0.005.
 
 ## Which one to choose
 

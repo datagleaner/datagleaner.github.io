@@ -9,9 +9,13 @@ To enrich HubSpot companies with an email and phone number, export the companies
 
 Disclosure: Data Gleaner, mentioned near the end as one option for long lists and automation, is us. The export, script and import need only your HubSpot account.
 
-## Why HubSpot's own enrichment does not cover this
+## Check HubSpot's own enrichment first
 
-A write-up from the lead-data vendor [LeadMagic](https://leadmagic.io/blog/hubspot-data-enrichment) (a vendor with its own product to sell, so read it with that in mind) says HubSpot's built-in contact enrichment matches on first name, last name and work email, so a contact with a personal address or no email is not filled, and that it adds no personal mobile numbers and does not tell you whether an address will bounce. Its advice is to add a separate finder for those fields. For company-level details there is a cheaper source that is already public: the company's own website.
+If your portal has a paid hub (Marketing, Sales, Service, Data or Content Hub at Starter or above, or Smart CRM Professional or Enterprise), HubSpot's [data enrichment](https://knowledge.hubspot.com/records/enrich-your-contact-and-company-data) can fill company properties from the Company domain name, including Phone number, LinkedIn company page, Street address, City, Postal code and Country/Region. It needs Super Admin or the Data enrichment permission, and companies without a domain are not enriched. Run it first if you have it.
+
+What it does not give you is a company email: HubSpot has no default company property for one. And its values come from HubSpot's data provider, not from what the company publishes today. The company's own website fills those gaps: the inbox it publishes, the phone on its contact page, and the fields enrichment left blank, including on the free CRM.
+
+Apify also has a [HubSpot integration](https://docs.apify.com/integrations/hubspot) that runs Apify's own Contact Details Scraper from a company record. It creates or updates HubSpot **contacts** associated with the company and does not change the company record itself, so use it if you want contact records rather than company properties.
 
 ## The field mapping
 
@@ -261,7 +265,7 @@ For no code, paste the domains into **Websites**, click **Start**, export the da
 ## FAQ
 
 **Can HubSpot find a company's email and phone number automatically?**
-Not from the website. A LeadMagic write-up says HubSpot's built-in enrichment matches contacts on name and work email, so contacts with a personal address or no email are not filled, and that it adds no personal mobile numbers. For a company's published inbox and main phone, the quickest source is its own website, which a script or scraper can read and you can import back.
+Partly. On a paid hub, HubSpot's data enrichment can fill a company's Phone number, LinkedIn company page and address from its domain, using HubSpot's data provider. It does not fill a company email, because there is no default company property for one. For the inbox a company publishes, and for any field enrichment left blank or on the free CRM, the source is the company's own website, which a script or scraper can read and you can import back.
 
 **What is the difference between this and Apollo or Hunter?**
 This step reads what a company publishes about itself: a generic inbox, a main phone, a LinkedIn page and an address. Apollo and Hunter are for person-level emails, such as the right contact at the company. Running the website step first is cheaper, because you only buy person-level data for companies that are worth approaching.
@@ -280,7 +284,7 @@ It depends on where you and the recipients are and on what you do with the data.
 
 ## Related guides
 
-- [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites): the email half of this job in more depth, including obfuscated forms.
+- [Find email addresses from a list of websites](../contact-and-lead-scrapers): the email half of this job in more depth, including obfuscated forms.
 - [Extract phone numbers from a list of websites](extract-phone-numbers-from-websites): how the phone parsing and E.164 step work.
 - [Find company social media profiles from a website](find-company-social-media-profiles-from-website): the LinkedIn column and the other profiles.
 
@@ -295,7 +299,7 @@ It depends on where you and the recipients are and on what you do with the data.
       "name": "Can HubSpot find a company's email and phone number automatically?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not from the website. A LeadMagic write-up says HubSpot's built-in enrichment matches contacts on name and work email, so contacts with a personal address or no email are not filled, and that it adds no personal mobile numbers. For a company's published inbox and main phone, the quickest source is its own website, which a script or scraper can read and you can import back."
+        "text": "Partly. On a paid hub, HubSpot's data enrichment can fill a company's Phone number, LinkedIn company page and address from its domain, using HubSpot's data provider. It does not fill a company email, because there is no default company property for one. For the inbox a company publishes, and for any field enrichment left blank or on the free CRM, the source is the company's own website, which a script or scraper can read and you can import back."
       }
     },
     {

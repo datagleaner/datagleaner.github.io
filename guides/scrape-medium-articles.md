@@ -136,7 +136,7 @@ What it does, from its documentation:
 - Optionally returns the responses (comments) under each article as separate items.
 - Uses Medium's public GraphQL endpoint, article pages and RSS, with no login, no cookies and no browser. If Medium refuses the main endpoint, it falls back to RSS and says so in the log, which means 10 stories per feed without claps or follower counts.
 - Member-only stories come back as the public preview, marked `contentIsPartial: true`. It does not log in and cannot read paywalled text.
-- Costs $0.003 per article ($3 per 1,000) and $0.0005 per response. You pay only for items returned.
+- Costs $0.002 per article ($2 per 1,000) and $0.0005 per response. You pay only for items returned.
 
 The same tag query as above, run through it:
 
@@ -163,7 +163,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
     print(f'{item.get("title")} | {author} | {item.get("claps")} claps | {item.get("readingTimeMinutes")} min | {item.get("url")}')
 ```
 
-That run returns up to 10 articles, so it costs at most $0.03. Set `includeContent` to `True` to add `contentText` and `contentMarkdown`; the price per article is the same.
+That run returns up to 10 articles, so it costs at most $0.02. Set `includeContent` to `True` to add `contentText` and `contentMarkdown`; the price per article is the same.
 
 ## FAQ
 

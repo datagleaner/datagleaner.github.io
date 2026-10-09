@@ -11,7 +11,7 @@ Disclosure: Data Gleaner, mentioned near the end as one option for large lists, 
 
 ## Why the Maps export has no email
 
-Google Maps listings show a business's name, category, address, phone number and website. An email is not a standard field, so scrapers of Maps data return the website and leave the email for a second step. That gap is visible in the market: [MapsLeads describes the same enrichment step](https://www.mapsleads.co/blog/enrich-google-maps-leads-with-emails), and the Apify Store lists several scrapers built for it. The second step is a crawl of each business's own site, which is what this page covers.
+Google Maps listings show a business's name, category, address, phone number and website. An email is not a standard field, so scrapers of Maps data return the website and leave the email for a second step: a crawl of each business's own site, which is what this page covers.
 
 ## Step 1: clean the Website column into domains
 
@@ -36,7 +36,7 @@ The script below handles the first four and the last. It cannot read the fifth.
 
 ## The Python script
 
-It reads your CSV, scans each unique domain, and writes a new CSV with your original columns plus `domain`, `emails`, `phones`, `socials` and `email_source` (the pages the emails came from). It uses `requests` and the standard library. I ran its parsing on sample HTML with a Cloudflare-encoded address, an `[at]`/`[dot]` address, a `mailto:` link with a query string, a `tel:` link and an image file name: it returned the three real addresses and the phone number, and ignored the image name. I also ran the full command on a small CSV with one real site listed twice in different forms, an empty row and a Facebook page: it scanned the site once, filled both of its rows and skipped the other two. I did not test it against a large list, so run it on a sample first.
+It reads your CSV, scans each unique domain, and writes a new CSV with your original columns plus `domain`, `emails`, `phones`, `socials` and `email_source` (the pages the emails came from). It uses `requests` and the standard library. We ran its parsing on sample HTML with a Cloudflare-encoded address, an `[at]`/`[dot]` address, a `mailto:` link with a query string, a `tel:` link and an image file name: it returned the three real addresses and the phone number, and ignored the image name. We also ran the full command on a small CSV with one real site listed twice in different forms, an empty row and a Facebook page: it scanned the site once, filled both of its rows and skipped the other two. We did not test it against a large list, so run it on a sample first.
 
 ```python
 # pip install requests
@@ -195,7 +195,7 @@ Limits of this script:
 
 ## Realistic hit rates by business type
 
-I have no measured hit rates to give you, and a made-up percentage would only mislead you. What can be said honestly is which kinds of business tend to publish an email and where. Treat these as tendencies to test, not figures:
+The best published measurement we know of is from [HasData](https://hasdata.com/blog/extract-emails-from-google-maps), a scraping vendor, on 1,994 Google Maps businesses across 20 categories in five US cities (updated September 2026). Per 100 businesses a search returned, 90 listed a website, 88 of those sites answered, and 51 had an email somewhere on the site: 30 a person's address and 21 a generic `info@` or `contact@`. That was with plain HTTP and no JavaScript, like the script above; rendering the pages in a browser raised it to about 59 per 100. By category, gyms returned 66 contacts per 100 businesses and dry cleaners 23, largely because only 61 in 100 dry cleaners had a site at all. We have not repeated the measurement, so treat it as one data point. The pattern by business type:
 
 - **Companies with a website of their own** (agencies, clinics, law firms, contractors) usually publish a contact address on a contact page or in the footer. These are your best rows.
 - **German-speaking businesses** are legally expected to publish contact details in the impressum, so read that page.
@@ -279,7 +279,7 @@ Take the website column from your Google Maps or Outscraper export, reduce each 
 The address is usually on a page other than the home page, or it is hidden. Common causes are a contact or impressum page that the script never opened, an address written as `name [at] domain [dot] com`, Cloudflare email protection, which replaces the address with an encoded string, an address injected by JavaScript, or an address shown as an image. The first three can be fixed in a plain HTTP script; the last two need a browser or are not readable.
 
 **What share of Google Maps leads will return an email?**
-There is no honest single figure, and this page does not invent one. It depends on the business type, the country and how many pages you read. Measure it on your own list: run 100 random rows, count how many return an email and check ten misses by hand. That tells you the hit rate for your niche and shows whether the misses are hidden addresses or sites that simply publish no email.
+Roughly half, in the one large published measurement: HasData found an email on the sites of 51 of every 100 US Maps businesses with a plain HTTP fetch, and about 59 when pages were rendered in a browser, ranging from gyms (high) to dry cleaners (low). It depends on the business type, the country and how many pages you read, so measure it on your own list: run 100 random rows, count how many return an email and check ten misses by hand. That tells you the hit rate for your niche and shows whether the misses are hidden addresses or sites that simply publish no email.
 
 **What if a lead has no website in Google Maps?**
 Then there is nothing to scan, and a website-based method cannot help. Those rows keep their phone number and address from the Maps export. Some businesses list only a Facebook or Instagram page as their website; public contact details on such a page are often not served without a login, so expect few results there.
@@ -292,7 +292,7 @@ It depends on where you and the recipients are and on who the address belongs to
 
 ## Related guides
 
-- [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites): the general method for any list of domains, including obfuscated forms.
+- [Find email addresses from a list of websites](../contact-and-lead-scrapers): the general method for any list of domains, including obfuscated forms.
 - [Extract phone numbers from a list of websites](extract-phone-numbers-from-websites): the same approach for phones, normalized to E.164.
 - [Find company social media profiles from a website](find-company-social-media-profiles-from-website): get LinkedIn, Facebook and Instagram pages for the same leads.
 
@@ -323,7 +323,7 @@ It depends on where you and the recipients are and on who the address belongs to
       "name": "What share of Google Maps leads will return an email?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "There is no honest single figure, and this page does not invent one. It depends on the business type, the country and how many pages you read. Measure it on your own list: run 100 random rows, count how many return an email and check ten misses by hand. That tells you the hit rate for your niche and shows whether the misses are hidden addresses or sites that simply publish no email."
+        "text": "Roughly half, in the one large published measurement: HasData found an email on the sites of 51 of every 100 US Maps businesses with a plain HTTP fetch, and about 59 when pages were rendered in a browser, ranging from gyms (high) to dry cleaners (low). It depends on the business type, the country and how many pages you read, so measure it on your own list: run 100 random rows, count how many return an email and check ten misses by hand. That tells you the hit rate for your niche and shows whether the misses are hidden addresses or sites that simply publish no email."
       }
     },
     {

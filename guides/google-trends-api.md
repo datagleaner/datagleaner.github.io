@@ -80,14 +80,14 @@ Disclosure: Data Gleaner is us. Our Google Trends Scraper is an Actor on the Api
 
 What it returns, one dataset item per term, location and output:
 
-- Interest over time, interest by region (country, region, city or DMA), related queries and related topics (top and rising), and Trending Now for a country (4, 24, 48 or 168-hour window).
+- Interest over time, interest by region (country, region, city or DMA), related queries (top and rising), and Trending Now for a country (4, 24, 48 or 168-hour window). Related topics are in beta and often come back empty, because Google withholds them from automated requests; empty results are not charged.
 - Any number of terms in one run: more than 5 are split into groups of up to 5 that share the first term as anchor, and each group is rescaled to the first group's scale. The unscaled value is kept in `rawValue`.
 - Summary columns next to the arrays: `average`, `peakValue`, `peakDate`, `latestValue`, `topRegion`, `topQuery`.
 - Web, YouTube, News, Image or Shopping search, any category ID, preset or custom date ranges back to 2004.
 
-It reads the same public Trends data as the website, so the numbers are the website's relative index, not the official API's consistently scaled values. It paces requests and backs off on HTTP 429; a large batch can take several minutes.
+It reads the same public Trends data as the website, so the numbers are the website's relative index, not the official API's consistently scaled values. It paces requests and backs off on HTTP 429; in our test a 40-term, 2-country batch with three outputs took about 14 minutes.
 
-Pricing is $1.50 per 1,000 results, charged per dataset item. For example, 40 terms in 2 countries with interest over time and related queries is 160 results, about $0.24. You can cap the charge for any run.
+Pricing is $1 per 1,000 results, charged per dataset item. For example, 40 terms in 2 countries with interest over time and related queries is 160 results, about $0.16. You can cap the charge for any run.
 
 ```python
 # pip install apify-client
@@ -116,12 +116,12 @@ This returns 5 results, under $0.01. Add `"interestByRegion"`, `"relatedQueries"
 
 | Option | Access | Cost | Terms per comparison | Related queries | Trending Now | History |
 |---|---|---|---|---|---|---|
-| Official Trends API (alpha) | Apply and wait for approval | Not published | Dozens, consistently scaled | Not mentioned by Google | No | About 5 years |
+| Official Trends API (alpha) | Apply and wait for approval | Not published | Dozens, consistently scaled | Not mentioned by Google | Not mentioned by Google | About 5 years |
 | Trends website + CSV | Anyone | Free | Up to 8 | Yes | Yes (on the site) | Back to 2004 |
 | Trending Now RSS | Anyone | Free | n/a | Related news only | Yes | None |
 | Unofficial endpoints / pytrends | Anyone, unsupported | Free | 5 per request | Yes | Yes | Back to 2004 |
 | SerpApi | API key | Free 250 searches/month, then from $25/month | 5 per request | Yes | Yes | Back to 2004 |
-| Google Trends Scraper (Apify, ours) | Apify token | $1.50 per 1,000 results | Any number, anchor-rescaled | Yes | Yes | Back to 2004 |
+| Google Trends Scraper (Apify, ours) | Apify token | $1 per 1,000 results | Any number, anchor-rescaled | Yes | Yes | Back to 2004 |
 
 A rough rule:
 

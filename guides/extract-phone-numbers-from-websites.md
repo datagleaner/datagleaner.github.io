@@ -244,7 +244,7 @@ It depends on where you and the people you contact are, and on what you do with 
 
 ## Related guides
 
-- [Find email addresses from a list of websites](find-email-addresses-from-list-of-websites): the same approach for emails, including obfuscated forms.
+- [Find email addresses from a list of websites](../contact-and-lead-scrapers): the same approach for emails, including obfuscated forms.
 - [Extract emails from a website for free](extract-emails-from-website-free): free methods for a single site, with a script.
 - [Get all URLs from a sitemap in Python](get-all-urls-from-sitemap-python): build the list of pages to scan.
 

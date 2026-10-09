@@ -216,7 +216,7 @@ What it does not do: it does not download video files, does not list an uploader
 ## Related
 
 - [Weibo, Bilibili and Xiaohongshu scraper APIs compared](../chinese-social-media-scrapers)
-- [How to scrape Weibo posts with Python](scrape-weibo-posts-python)
+- [Weibo API in Python: get Weibo posts from Python](weibo-api-python)
 - [How to scrape Xiaohongshu (RedNote)](scrape-xiaohongshu-rednote)
 
 <!-- jsonld:auto -->

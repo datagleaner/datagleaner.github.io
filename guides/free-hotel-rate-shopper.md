@@ -5,7 +5,7 @@ description: "A free or near-free hotel rate shopper for independent hotels: sho
 
 # A free hotel rate shopper for small hotels
 
-A small hotel can rate shop for free on Google Hotels, which shows each competitor's price on every booking site for the dates you set. Check five to ten competitors for fixed stay dates, save one row per hotel, per site, per day in a sheet, and a pivot of your rate against the compset median answers the daily question: am I priced above or below my market for this night? By hand it costs nothing; automated with the script below it costs a few dollars a month. This page covers the manual route, your own free script, a hosted daily shop with the pivot, and when a paid revenue management system (RMS) is worth the money.
+A small hotel can rate shop for free on Google Hotels, which shows each competitor's price on every booking site for the dates you set. Check five to ten competitors for fixed stay dates, save one row per hotel, per site, per day in a sheet, and a pivot of your rate against the compset median answers the daily question: am I priced above or below my market for this night? By hand it costs nothing; automated with the script below it costs a few dollars a month. This page covers the manual route, a vendor's free plan, your own free script, a hosted daily shop with the pivot, and when a paid revenue management system (RMS) is worth the money.
 
 Disclosure: Data Gleaner, the hosted scraper described in the middle of this page, is us. The manual method and the pivot work without it, and the spreadsheet part is free whatever you use to collect prices.
 
@@ -28,11 +28,15 @@ For two or three competitors and a weekly check, a manual look costs nothing:
 
 It teaches you your market. It stops working at about five hotels, three stay dates and daily checks, because that is 15 lookups a day with copy and paste errors. If you only want a notification when one hotel's price changes, Google Hotels has a price tracking toggle; see [track hotel prices on Google Hotels](track-hotel-prices-google-hotels). It alerts you to a change on one set of dates, but it does not build a compset history for you.
 
-## Free option 2: your own script
+## Free option 2: a vendor's free plan
+
+Some rate-shopping vendors have a free tier. Hotel Price Reporter [announced a free plan](https://hospitalitynet.org/news/4083102.html) that covers 3 hotels and 180 days of data; the announcement dates from 2017, so check its current terms before you rely on it. Three hotels is your own property plus two competitors, which is too small for a real compset, but it is a quick way to see what a hosted rate shop looks like. Most other vendors offer a time-limited trial rather than a free plan, after which they charge a monthly fee.
+
+## Free option 3: your own script
 
 The prices on Google Hotels come from internal calls that you can make with plain HTTP in Python, with no browser. The full working code, and its honest limits (an undocumented endpoint, possible blocks from cloud IPs, consent pages), are in [scrape Google Hotels with Python](scrape-google-hotels-python). That guide prices one hotel across several dates, so a compset shop is a loop over your hotels as well as your stay dates. You own the code and pay nothing, and you also own the fixing when the endpoint changes. For a small hotel team that is the real cost, so read that guide's limits before you commit.
 
-## Option 3: the Data Gleaner Google Hotels Scraper
+## Option 4: the Data Gleaner Google Hotels Scraper
 
 Disclosure: Google Hotels Scraper is ours (Data Gleaner).
 
