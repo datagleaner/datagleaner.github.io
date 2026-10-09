@@ -1,0 +1,6 @@
+title: Data Gleaner
+description: Pay-per-result web scraping APIs on the Apify Store, with guides and runnable examples.
+url: https://datagleaner.github.io
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
