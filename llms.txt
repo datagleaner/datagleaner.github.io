@@ -76,6 +76,15 @@ These cannot be run yet. Prices are the planned ones; each family page will link
 - [Scrape Google Hotels with Python (No Browser, No Proxy)](https://datagleaner.github.io/guides/scrape-google-hotels-python)
 - [Export Sitemap URLs to Excel or CSV (Index, .gz, Many Sites)](https://datagleaner.github.io/guides/sitemap-to-csv-excel)
 - [Weibo Brand Monitoring: A Low-Cost Social Listening Setup](https://datagleaner.github.io/guides/weibo-brand-monitoring)
+- [Find Emails for Google Maps Leads From the Website Column](https://datagleaner.github.io/guides/enrich-google-maps-leads-with-emails)
+- [Enrich HubSpot Companies With Email and Phone From Their Domain](https://datagleaner.github.io/guides/enrich-hubspot-companies-contact-details)
+- [Find Bilibili Influencers (KOL) for Brand Marketing](https://datagleaner.github.io/guides/find-bilibili-influencers-kol)
+- [Free Hotel Rate Shopper for Small Hotels: Daily Compset Rates](https://datagleaner.github.io/guides/free-hotel-rate-shopper)
+- [Google Hotels Prices Into Google Sheets (Daily, No Extension)](https://datagleaner.github.io/guides/google-hotels-prices-to-google-sheets)
+- [Hotel Rate Parity Check on Google Hotels: Find Which OTA Undercuts You](https://datagleaner.github.io/guides/hotel-rate-parity-check-google-hotels)
+- [n8n Workflow to Scrape Emails From a List of Websites](https://datagleaner.github.io/guides/n8n-extract-emails-from-websites)
+- [Website Migration Redirect Map From Old Sitemap URLs](https://datagleaner.github.io/guides/website-migration-redirect-map-from-sitemap)
+- [Weibo Sentiment Analysis in Python: jieba, SnowNLP and BERT](https://datagleaner.github.io/guides/weibo-sentiment-analysis-python)
 
 ## Optional
 
