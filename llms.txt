@@ -68,6 +68,14 @@ These cannot be run yet. Prices are the planned ones; each family page will link
 - [WeChat Official Account Articles Scraper: 4 Ways (公众号)](https://datagleaner.github.io/guides/wechat-official-account-articles-scraper)
 - [Weibo API in Python: Official API, m.weibo.cn and Options](https://datagleaner.github.io/guides/weibo-api-python)
 - [微博爬虫 Python 教程：官方 API、m.weibo.cn 接口与开源工具](https://datagleaner.github.io/guides/weibo-scraper-zh)
+- [B站视频数据爬取：按关键词搜索，播放量、点赞、投币导出 CSV](https://datagleaner.github.io/guides/bilibili-video-data-scraper-zh)
+- [Extract Phone Numbers From a List of Websites](https://datagleaner.github.io/guides/extract-phone-numbers-from-websites)
+- [Find Social Media Profiles From a List of Company Websites](https://datagleaner.github.io/guides/find-company-social-media-profiles-from-website)
+- [Google Sheets - Extract Email From a Website URL](https://datagleaner.github.io/guides/google-sheets-extract-email-from-website-url)
+- [Hotel Price Comparison API: Booking vs Agoda vs Expedia as JSON](https://datagleaner.github.io/guides/hotel-price-comparison-api)
+- [Scrape Google Hotels with Python (No Browser, No Proxy)](https://datagleaner.github.io/guides/scrape-google-hotels-python)
+- [Export Sitemap URLs to Excel or CSV (Index, .gz, Many Sites)](https://datagleaner.github.io/guides/sitemap-to-csv-excel)
+- [Weibo Brand Monitoring: A Low-Cost Social Listening Setup](https://datagleaner.github.io/guides/weibo-brand-monitoring)
 
 ## Optional
 
