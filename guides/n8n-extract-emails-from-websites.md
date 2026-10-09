@@ -135,6 +135,7 @@ The Actor is [Website Contact Details Scraper](https://apify.com/datagleaner/web
 
 The JSON below has four nodes: Manual Trigger, Google Sheets "Get Row(s)", HTTP Request, and Google Sheets "Append or Update Row" matching on the `website` column. The HTTP Request node sends `{"websites": ["<the row's site>"], "maxPagesPerSite": 8}` and receives that site's result. The Google Sheets step maps the result onto your columns with plain n8n expressions (`.map(...).join(', ')`), not a Code node.
 
+{% raw %}
 ```json
 {
   "name": "Sheet of websites to contacts (Data Gleaner)",
@@ -210,6 +211,7 @@ The JSON below has four nodes: Manual Trigger, Google Sheets "Get Row(s)", HTTP 
   "settings": { "executionOrder": "v1" }
 }
 ```
+{% endraw %}
 
 To use it:
 
