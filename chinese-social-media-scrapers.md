@@ -20,7 +20,7 @@ None of China's big social platforms offers an open API for reading public posts
 
 Free in money, costly in time. It suits a one-off research pull or a developer who wants full control.
 
-1. **Weibo.** The mobile site (m.weibo.cn) serves search results and user timelines as JSON to anonymous visitors. Keyword search stops at roughly 25 pages (about 1,000 posts) per keyword, and a user's timeline shows guests only its first page. See [how to scrape Weibo posts with Python](guides/scrape-weibo-posts-python) for a step-by-step version.
+1. **Weibo.** The mobile site (m.weibo.cn) serves search results and user timelines as JSON to anonymous visitors. Keyword search stops at roughly 25 pages (about 1,000 posts) per keyword, and a user's timeline shows guests only its first page. See [Weibo API in Python](guides/weibo-api-python) for a step-by-step version.
 2. **Bilibili.** Community libraries such as `bilibili-api-python` wrap the web endpoints, including the wbi signing. Danmaku (bullet comments) come from a public XML file per video part. Anonymous visitors get only about 3 to 4 top comments per video. See [how to scrape Bilibili comments and danmaku](guides/scrape-bilibili-comments-danmaku).
 3. **Xiaohongshu.** Note pages embed their data in the HTML, but only when the link carries the `xsec_token` parameter Xiaohongshu adds to shared links. Keyword search needs a logged-in session. See [how to scrape Xiaohongshu (RedNote)](guides/scrape-xiaohongshu-rednote).
 4. **WeChat articles.** A public `mp.weixin.qq.com` article link returns the full article HTML. To discover articles by keyword you go through Sogou's WeChat search, which returns recent articles only and shows a verification page if you query too fast.
@@ -140,7 +140,6 @@ Without preloading, the agent can find any of these Actors with Apify's `search-
 
 ## Related pages
 
-- [How to scrape Weibo posts with Python](guides/scrape-weibo-posts-python)
 - [How to scrape Bilibili comments and danmaku](guides/scrape-bilibili-comments-danmaku)
 - [How to scrape Xiaohongshu (RedNote)](guides/scrape-xiaohongshu-rednote)
 - [Weibo API in Python: official API, m.weibo.cn and options](guides/weibo-api-python)

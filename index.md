@@ -18,9 +18,9 @@ Web scraping APIs that return clean JSON and charge only for the results you get
 ## Popular guides
 
 - [Google Hotels API: hotel prices as JSON](guides/google-hotels-api)
-- [How to find email addresses from a list of websites](guides/find-email-addresses-from-list-of-websites)
+- [Find emails from a list of websites (API and Python)](contact-and-lead-scrapers)
 - [Pytrends alternative: Google Trends data in Python](guides/pytrends-alternative-google-trends-python)
-- [How to scrape Weibo posts with Python](guides/scrape-weibo-posts-python)
+- [Weibo API in Python: official API, m.weibo.cn and options](guides/weibo-api-python)
 - [Web scraping MCP server for AI agents](guides/web-scraping-for-ai-agents-mcp)
 
 [All guides](guides/)

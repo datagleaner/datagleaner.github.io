@@ -52,6 +52,8 @@ What it will miss, and what to add if you need it:
 - **Obfuscated addresses** such as `name [at] domain [dot] com`, and Cloudflare's email protection, which hides the address in an encoded attribute.
 - **JavaScript-rendered pages.** Plain HTTP sees only the HTML the server sends. A headless browser (Playwright) is slower but sees script-inserted content.
 - **Emails shown as images.** No text extractor reads these.
+- **False positives.** Image names such as `logo@2x.png`, tracking IDs like `abc123@sentry.io` and placeholders such as `you@example.com` match the regex. Filter them out before you use the list.
+- **Redirects.** `example.com` may redirect to `www.example.com/en/`. Compare hosts after the redirect, or a link-following script skips every internal link.
 - **robots.txt and rate limits.** Check `robots.txt`, keep one or two requests per site at a time, and treat a 403 or 429 as a "no" rather than retrying hard.
 
 ## Option 2: an email-finder API
@@ -140,12 +142,22 @@ Then ask in plain words, for example: "Find the contact email, phone number and 
 - **Published addresses are mostly role inboxes.** Expect `info@` and `sales@` more often than named people. Some sites publish no email at all, only a contact form; Website Contact Details Scraper reports contact forms and social profiles, and YouTube Channel Contacts reports a channel's links and socials, so those rows are still useful.
 - **Some sites refuse automated requests.** A site that answers 403 or 429 is reported as `unreachable` and not charged. Neither the script above nor our Actors are built to get around a site that refuses.
 - **No JavaScript rendering in our Actors.** Contact details inserted only by scripts are not found; a headless browser is the fix if you need them.
-- **The law applies to what you do with the list.** Emails can be personal data. GDPR, CAN-SPAM and local anti-spam rules govern storing and contacting people, whichever tool found the address.
+- **The law applies to what you do with the list.** Emails can be personal data, whichever tool found the address. See the legal basics below.
+
+## Legal basics: GDPR and CAN-SPAM
+
+This is general information, not legal advice.
+
+- **GDPR (EU and UK).** A work email that names a person (`jane.doe@company.com`) is personal data even when it is published. You need a lawful basis to store and use it, usually legitimate interest for business-to-business outreach, and you must tell the person where you got their data and let them object. Some countries, such as Germany, require prior consent before marketing email even to businesses.
+- **CAN-SPAM (US).** Cold commercial email is allowed, but each message needs an honest sender and subject line, your postal address and a working opt-out, and you must honour opt-outs within 10 business days.
+- **Other rules.** Canada (CASL) and Australia (Spam Act) generally require consent first, and some sites forbid collecting their contact details in their terms of use.
+
+In practice: collect only what you need, keep the source page for each address (it answers "where did you get my email?"), verify addresses before sending, and keep an unsubscribe list.
 
 ## FAQ
 
 **How do I find email addresses from a list of websites for free?**
-Use a short script like the one above: fetch each site's home and contact pages and match `mailto:` links and email patterns. It is free and works for small lists; add link-following and de-obfuscation as your list grows.
+Use a short script like the one above: fetch each site's home and contact pages and match `mailto:` links and email patterns. It is free and works for small lists; add link-following and de-obfuscation as your list grows. Under about 20 sites, checking by hand is fine: look at the footer, the contact, about and team pages, the Impressum or legal notice (German and Austrian law requires one, and it usually lists an email), and the privacy policy, then search the page source for `mailto:`.
 
 **Is there an API to find emails from a website?**
 Yes, two kinds. Email-finder APIs such as Hunter return addresses from their database and pattern guesses. Scraper APIs such as the Apify Actors above fetch the site live and return only what it publishes, with the page it came from.
@@ -156,12 +168,14 @@ Pass the whole list in one call. Website Contact Details Scraper takes thousands
 **Can I find an email address from a website link without visiting every page?**
 A tool still has to fetch the pages, but it only needs a few: the home page, contact, about, legal notice and team pages hold most published addresses. That is why the default here is 8 pages per site.
 
+**Can I find all email addresses on a domain?**
+Only the ones that are published or that a finder tool has seen elsewhere. A scraper returns what the site shows; Hunter-style tools add addresses from their database and guesses from the company's email pattern. No tool can list every mailbox on a domain.
+
 **Do I need a proxy or a login?**
 No login. For a normal list, no proxy either; both Actors run without one by default.
 
 ## Related
 
-- [Find email addresses from a list of websites (step-by-step guide)](guides/find-email-addresses-from-list-of-websites)
 - [Find a YouTube channel's email](guides/find-youtube-channel-email)
 - [How to extract emails from a website for free](guides/extract-emails-from-website-free)
 - [Get all URLs from a sitemap in Python](guides/get-all-urls-from-sitemap-python), useful for building the site list in the first place
@@ -178,7 +192,7 @@ No login. For a normal list, no proxy either; both Actors run without one by def
         "name": "How do I find email addresses from a list of websites for free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Use a short script like the one above: fetch each site's home and contact pages and match mailto: links and email patterns. It is free and works for small lists; add link-following and de-obfuscation as your list grows."
+          "text": "Use a short script like the one above: fetch each site's home and contact pages and match mailto: links and email patterns. It is free and works for small lists; add link-following and de-obfuscation as your list grows. Under about 20 sites, checking by hand is fine: look at the footer, the contact, about and team pages, the Impressum or legal notice (German and Austrian law requires one, and it usually lists an email), and the privacy policy, then search the page source for mailto:."
         }
       },
       {
@@ -203,6 +217,14 @@ No login. For a normal list, no proxy either; both Actors run without one by def
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "A tool still has to fetch the pages, but it only needs a few: the home page, contact, about, legal notice and team pages hold most published addresses. That is why the default here is 8 pages per site."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I find all email addresses on a domain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only the ones that are published or that a finder tool has seen elsewhere. A scraper returns what the site shows; Hunter-style tools add addresses from their database and guesses from the company's email pattern. No tool can list every mailbox on a domain."
         }
       },
       {

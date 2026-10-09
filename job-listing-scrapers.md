@@ -188,7 +188,6 @@ For one company, call its ATS feed with `requests`, as in the Greenhouse example
 ## Related
 
 - [Contact and lead scrapers](contact-and-lead-scrapers): turn a list of hiring companies into contact details.
-- [Find email addresses from a list of websites](guides/find-email-addresses-from-list-of-websites)
 - [SEEK jobs API](guides/seek-jobs-api): get SEEK Australia and New Zealand job ads as JSON.
 - [Web content scrapers](web-content-scrapers)
 

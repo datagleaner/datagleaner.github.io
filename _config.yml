@@ -4,3 +4,4 @@ url: https://datagleaner.github.io
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
