@@ -147,3 +147,161 @@ Without preloading, the agent can find any of these Actors with Apify's `search-
 - [Bilibili API in Python: bilibili-api-python and wbi signing](guides/bilibili-api-python)
 - [WeChat Official Account articles scraper](guides/wechat-official-account-articles-scraper)
 - [Web scraping MCP server for AI agents](guides/web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a Weibo API for scraping posts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weibo's open platform requires a registered developer app and does not give ordinary apps keyword search over all public posts. Most people use the mobile site's JSON endpoints or a hosted scraper instead. Either way, Weibo caps keyword search at about 1,000 posts per keyword."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Xiaohongshu (RedNote) API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not for reading public notes. Scrapers read the public note pages (which need the xsec_token from a shared link) or use a logged-in session for search and comments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I scrape Bilibili comments without logging in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but Bilibili shows anonymous visitors only about 3 to 4 top comments per video. Full comment lists need a logged-in session cookie from an account you own."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Weibo scraper on GitHub?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, several, plus MediaCrawler for multiple platforms at once. Check the last commit date and the license, since Weibo changes its endpoints and some projects, MediaCrawler among them, forbid commercial use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it legal to scrape Chinese social media?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on what you collect, where you are and how you use it. Stick to public data, keep the request rate low, respect each platform's terms, and treat posts and profiles as personal data under China's PIPL, the GDPR and any other law that applies. This is not legal advice."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Weibo Scraper",
+          "url": "https://apify.com/datagleaner/weibo-scraper",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Public posts by keyword or user: full text, timestamp, like / repost / comment counts, images, video, poster's region, author.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.003",
+              "priceCurrency": "USD",
+              "description": "US$0.003 per post",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.003",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "post"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Bilibili Scraper",
+          "url": "https://apify.com/datagleaner/bilibili-scraper",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Videos by keyword or link with views, likes, coins, favorites, tags and uploader; comments and replies with IP location; danmaku with time in video.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.008",
+              "priceCurrency": "USD",
+              "description": "US$0.008 per video",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.008",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "video"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "price": "0.002",
+              "priceCurrency": "USD",
+              "description": "US$0.002 per comment",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.002",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "comment"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "price": "0.0005",
+              "priceCurrency": "USD",
+              "description": "US$0.0005 per danmaku",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.0005",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "danmaku"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+</script>

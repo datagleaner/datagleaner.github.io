@@ -119,3 +119,95 @@ It signs in through the browser on first use (run `/mcp`), or pass `--header "Au
 - [Google Hotels API: how to get hotel prices as JSON](guides/google-hotels-api)
 - [Google Trends API: official alpha, free and paid options](guides/google-trends-api)
 - [Google Ads Transparency Center API options](guides/google-ads-transparency-center-api)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a free Google Trends API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google announced an official Google Trends API in July 2025; it is still an alpha with access by application and no published pricing. The free options are the Trends website's per-chart CSV download and unofficial libraries: pytrends, archived since April 2025 and often rate limited, or a maintained alternative such as trendspyg, which hits the same rate limits. See Google Trends API options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Google Hotels have an API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not for reading search results. Google's hotel APIs are for hotels and booking sites that send their prices to Google. To get prices, ratings and booking-site offers for a place and dates, you need a scraper that reads the public Google Hotels results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Google News API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No official JSON API. Google News publishes RSS feeds for searches and topics, limited to about 100 items each, with encoded links. A scraper API like ours wraps those feeds, decodes the links to publisher URLs and returns JSON."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Google Ads Transparency Center API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No official API. Google publishes a free BigQuery dataset for ads shown in the EEA and Turkey, without creative images. For other regions, the Transparency Center website is public, and a scraper can list an advertiser's ads with dates, formats and creative images."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a Google account or API key for these Actors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. You need an Apify account and its API token, and you pay per result."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Google Hotels Scraper",
+          "url": "https://apify.com/datagleaner/google-hotels-scraper",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "One record per hotel for your dates: lowest price per night and total, every booking site's offer with its link, rating, review count, star class, amenities, address, coordinates, website, photos.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "3.00",
+              "priceCurrency": "USD",
+              "description": "US$3.00 per 1,000 hotels",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "3.00",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1000,
+                  "unitText": "hotels"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+</script>

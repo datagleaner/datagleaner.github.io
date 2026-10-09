@@ -1,0 +1,76 @@
+# Data Gleaner
+
+> Data Gleaner publishes web scraping Actors on the Apify Store. Each returns one JSON record per result (downloadable as CSV or Excel) and charges per result, with no subscription; platform usage is included in the price. Five Actors are live now: Weibo, Bilibili, Google Hotels, website contact details and sitemap URLs. The others listed below are in development and cannot be run yet.
+
+How to call a live Actor: run it from the Apify Console, from Python or JavaScript with the `apify-client` package, through the REST API (`POST https://api.apify.com/v2/acts/datagleaner~<actor>/run-sync-get-dataset-items` with the run input as the JSON body and the header `Authorization: Bearer <APIFY_TOKEN>`), or as a tool through Apify's MCP server (below). You need an Apify account and its API token; no account on the scraped site is needed. Every run can be capped with a maximum total charge, and the Actor stops when it is reached. Prices are those stated in each Actor's README.
+
+## Live on the Apify Store
+
+- [Weibo Scraper](https://apify.com/datagleaner/weibo-scraper): Public Sina Weibo posts, no login. Input: `searchQueries` (keywords) and/or `userIds` (numeric IDs or profile URLs), `maxItemsPerQuery` (default 100), optional `sinceDate`. Output: one record per post with full text, ISO 8601 time, like, repost and comment counts, image URLs, video, poster's region, author, and the original post for reposts; `includeUserProfile` adds author follower count, bio and verification. Weibo search returns about 1,000 posts per keyword at most. Price: US$3 per 1,000 posts (US$0.003 each).
+- [Bilibili Scraper](https://apify.com/datagleaner/bilibili-scraper): Bilibili videos, comments and danmaku, no login. Input: `searchKeywords` and/or `videoUrls` (links, BV or av IDs); optional `includeComments`, `includeReplies` and `includeDanmaku`. Output: videos with title, tags, category, duration, views, likes, coins, favorites, shares and uploader; comments and replies with IP location; danmaku with time in the video. Without your own `sessionCookie`, Bilibili shows only about 4 comments per video. Price: US$8 per 1,000 videos, US$2 per 1,000 comments, US$0.50 per 1,000 danmaku.
+- [Google Hotels Scraper](https://apify.com/datagleaner/google-hotels-scraper): Hotel prices for specific dates. Input: `locations` (free text such as `Tokyo`) or `hotelUrls`, `checkIn` and `checkOut` (YYYY-MM-DD), `adults`, `currency`, `maxHotelsPerLocation` (default 20). Output: one record per hotel with lowest price per night and total, each booking site's price and link, rating, review count, star class, amenities, address, coordinates and photos. Price: US$3 per 1,000 hotels (US$0.003 each).
+- [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper): Public contact details of websites. Input: `websites` (URLs or bare domains, thousands per run). Output: one record per site with emails, phone numbers in E.164, social profile links, contact form pages, schema.org postal addresses and company name, each with the page it was found on. Price: US$4 per 1,000 websites that return at least one contact (US$0.004 each); sites with no contact or that fail are free.
+- [Sitemap URL Extractor](https://apify.com/datagleaner/sitemap-extractor): Every page URL a website's sitemaps list. Input: `websites` (URLs or domains), `maxUrlsPerSite` (default 5,000), optional include and exclude regex patterns. Output: one record per URL with `lastmod`, `changefreq`, `priority`, image count and the source sitemap; reads robots.txt, sitemap indexes and .xml.gz. It does not crawl links. Price: US$0.20 per 1,000 URLs; sites without a sitemap are free.
+
+## In development (not on the Apify Store yet)
+
+These cannot be run yet. Prices are the planned ones; each family page will link the Actor once it is published.
+
+- [Xiaohongshu (RedNote) Scraper](https://datagleaner.github.io/chinese-social-media-scrapers): Notes from note links, the recommended feed and trending category feeds, and profiles with their newest notes; no keyword search or comments. Planned price: US$0.003 per note or profile.
+- [WeChat Articles Scraper](https://datagleaner.github.io/chinese-social-media-scrapers): Public WeChat Official Account articles from links or keyword search, with title, account, publish time, full text, Markdown and images. Planned price: US$5 per 1,000 articles.
+- [China Brand Report](https://datagleaner.github.io/chinese-social-media-scrapers): An English social-listening report on one brand from Weibo and Bilibili, with volume, sentiment, translated top posts and videos, hashtags and top accounts, plus a CSV of every post. Planned price: US$4.99 per report.
+- [Google Trends Scraper](https://datagleaner.github.io/google-data-scrapers): Interest over time, interest by region, related queries and topics for any number of keywords, and Trending Now for a country. Planned price: US$1.50 per 1,000 results.
+- [Google News Scraper](https://datagleaner.github.io/google-data-scrapers): One record per article from search queries, topics or Google News feed URLs, with headline, outlet, publish time and the decoded publisher URL. Planned price: US$1.50 per 1,000 articles.
+- [Google Ads Transparency Scraper](https://datagleaner.github.io/google-data-scrapers): Ads from the Google Ads Transparency Center by advertiser ID, domain or company name, with format, first and last shown dates, creative image URLs and ad URL. Planned price: US$1.50 per 1,000 ads.
+- [YouTube Channel Contacts](https://datagleaner.github.io/contact-and-lead-scrapers): Public emails of YouTube channels from the description, About links, link-in-bio page and creator website, plus socials, subscribers and country. Planned price: US$0.015 per channel with a public email; channels without one are free.
+- [Career Site Jobs Scraper](https://datagleaner.github.io/job-listing-scrapers): Open jobs from Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Workable, Recruitee and Personio career sites in one format. Planned price: US$1.50 per 1,000 jobs.
+- [SEEK Jobs Scraper](https://datagleaner.github.io/job-listing-scrapers): Job ads from seek.com.au and seek.co.nz by keyword and location, with salary, work type, dates, full description and screening questions. Planned price: US$0.80 per 1,000 jobs.
+- [Web to Markdown](https://datagleaner.github.io/web-content-scrapers): Main content of each URL, or of the top results for a search query, as Markdown with title, language and word count. Planned price: US$1 per 1,000 pages; failed URLs are free.
+- [Medium Scraper](https://datagleaner.github.io/web-content-scrapers): Medium articles by URL, author, tag, publication or search, with full text, Markdown, claps and tags; optional responses. Planned price: US$3 per 1,000 articles and US$0.50 per 1,000 responses.
+- [Behance Scraper](https://datagleaner.github.io/web-content-scrapers): Behance projects by keyword or URL, and creator profiles with location, followers and freelance availability. Planned price: US$2 per 1,000 projects and US$3 per 1,000 profiles.
+- [Telegram Channel Scraper](https://datagleaner.github.io/web-content-scrapers): Messages from public Telegram channels with date, text, views, reactions, media links and forwards, plus one info row per channel; no Telegram account needed. Planned price: US$0.50 per 1,000 messages and US$0.001 per channel info row.
+
+## Use with AI agents (MCP)
+
+- [Apify MCP server](https://mcp.apify.com): Hosted server over Streamable HTTP. Sign in with OAuth, or send the header `Authorization: Bearer <APIFY_TOKEN>`.
+- To load only specific Actors as tools, add them to the URL: `https://mcp.apify.com?tools=datagleaner/weibo-scraper,datagleaner/sitemap-extractor`.
+- Claude Code: `claude mcp add --transport http apify "https://mcp.apify.com?tools=datagleaner/weibo-scraper"`
+- [Web scraping MCP server for AI agents: Apify setup guide](https://datagleaner.github.io/guides/web-scraping-for-ai-agents-mcp): Step-by-step setup for Claude, Cursor and other MCP clients.
+
+## Guides
+
+- [All guides](https://datagleaner.github.io/guides/): Index of every guide.
+- [Weibo, Bilibili and Xiaohongshu Scraper APIs Compared](https://datagleaner.github.io/chinese-social-media-scrapers): Chinese social media family page.
+- [Google Hotels, Trends and News Scraper APIs](https://datagleaner.github.io/google-data-scrapers): Google data family page.
+- [Find Emails From a List of Websites (API and Python)](https://datagleaner.github.io/contact-and-lead-scrapers): Contacts and leads family page.
+- [Job Listings Scraper API: Greenhouse, Lever, Workday, SEEK](https://datagleaner.github.io/job-listing-scrapers): Jobs family page.
+- [Website to Markdown and Sitemap Scraper APIs](https://datagleaner.github.io/web-content-scrapers): Web content family page.
+- [Bilibili API in Python: bilibili-api-python and wbi Signing](https://datagleaner.github.io/guides/bilibili-api-python)
+- [B站弹幕爬取：Python 抓取弹幕和评论，导出 XML/ASS](https://datagleaner.github.io/guides/bilibili-danmaku-scraper-zh)
+- [Convert a Website to Markdown for an LLM (Free and Paid)](https://datagleaner.github.io/guides/convert-website-to-markdown-for-llm)
+- [How to Export Telegram Channel Messages (JSON, HTML, CSV)](https://datagleaner.github.io/guides/export-telegram-channel-messages)
+- [How to Extract Emails From a Website for Free (5 Ways)](https://datagleaner.github.io/guides/extract-emails-from-website-free)
+- [How to Find Email Addresses from a List of Websites](https://datagleaner.github.io/guides/find-email-addresses-from-list-of-websites)
+- [How to Find the Sitemap of a Website (7 Ways)](https://datagleaner.github.io/guides/find-sitemap-of-website)
+- [How to Find a YouTuber's Email (YouTube Channel Email)](https://datagleaner.github.io/guides/find-youtube-channel-email)
+- [Get All URLs From a Sitemap in Python (Index and .gz)](https://datagleaner.github.io/guides/get-all-urls-from-sitemap-python)
+- [Google Ads Transparency Center API: Your Options in 2026](https://datagleaner.github.io/guides/google-ads-transparency-center-api)
+- [Google Hotels API: How to Get Hotel Prices as JSON](https://datagleaner.github.io/guides/google-hotels-api)
+- [Google News Scraper in Python: RSS Feeds and Real URLs](https://datagleaner.github.io/guides/google-news-scraper-python)
+- [Google Trends API: Official Alpha, Free and Paid Options](https://datagleaner.github.io/guides/google-trends-api)
+- [Pytrends Alternative: Google Trends Data in Python (2026)](https://datagleaner.github.io/guides/pytrends-alternative-google-trends-python)
+- [Download Bilibili Comments and Danmaku (XML, ASS, CSV)](https://datagleaner.github.io/guides/scrape-bilibili-comments-danmaku)
+- [Scrape Medium Articles with Python (RSS, API, Tools)](https://datagleaner.github.io/guides/scrape-medium-articles)
+- [How to Scrape Weibo Posts with Python (With and Without Login)](https://datagleaner.github.io/guides/scrape-weibo-posts-python)
+- [Xiaohongshu Scraper: How to Scrape RedNote Notes and Profiles](https://datagleaner.github.io/guides/scrape-xiaohongshu-rednote)
+- [SEEK Job Listings API: How to Get SEEK Jobs as Data](https://datagleaner.github.io/guides/seek-jobs-api)
+- [How to Track Hotel Prices on Google Hotels (and at Scale)](https://datagleaner.github.io/guides/track-hotel-prices-google-hotels)
+- [WeChat Official Account Articles Scraper: 4 Ways (公众号)](https://datagleaner.github.io/guides/wechat-official-account-articles-scraper)
+- [Weibo API in Python: Official API, m.weibo.cn and Options](https://datagleaner.github.io/guides/weibo-api-python)
+- [微博爬虫 Python 教程：官方 API、m.weibo.cn 接口与开源工具](https://datagleaner.github.io/guides/weibo-scraper-zh)
+
+## Optional
+
+- [Code examples on GitHub](https://github.com/datagleaner/apify-examples): Runnable Python and JavaScript for each Actor, including those still in development.
+- [Data Gleaner on Apify](https://apify.com/datagleaner): The publisher profile with every published Actor.
+- [Sitemap](https://datagleaner.github.io/sitemap.xml)

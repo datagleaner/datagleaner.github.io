@@ -191,3 +191,53 @@ For one company, call its ATS feed with `requests`, as in the Greenhouse example
 - [Find email addresses from a list of websites](guides/find-email-addresses-from-list-of-websites)
 - [SEEK jobs API](guides/seek-jobs-api): get SEEK Australia and New Zealand job ads as JSON.
 - [Web content scrapers](web-content-scrapers)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free job postings API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, several. Greenhouse, Lever and Ashby publish free, public JSON feeds of each company's open jobs, with no key needed. Adzuna and USAJOBS offer free search APIs with a key. The trade-off is that each one covers only its own jobs and returns its own format."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a LinkedIn or Indeed job postings API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for general job search. LinkedIn's job APIs are for approved partners posting jobs, and Indeed's current APIs are for employers and ATS partners posting jobs and handling applications, not for searching its listings. For employer jobs, the employer's own ATS feed is often the better source, since it is where the job was posted in the first place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a SEEK job search API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEEK's developer platform is for posting and managing ads, not searching them. A SEEK scraper such as our SEEK Jobs Scraper reads the public search results and returns them as JSON, with no SEEK account needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to scrape job postings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Job postings are published for anyone to read, and reading them is widely done, but the rules depend on where you are, the site's terms and what you do with the data. Postings can name recruiters or hiring managers, so if you store or contact people from this data, data-protection and anti-spam rules apply to you. Keep request rates modest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape job postings with Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For one company, call its ATS feed with requests, as in the Greenhouse example above. For many companies or several ATSes, call a hosted scraper through the apify-client package, as in the quick start."
+      }
+    }
+  ]
+}
+</script>

@@ -193,3 +193,95 @@ For public channels, yes: Telegram serves a web preview at `t.me/s/<channel>` th
 - [Scrape Medium articles](guides/scrape-medium-articles)
 - [Export Telegram channel messages](guides/export-telegram-channel-messages)
 - [Web scraping for AI agents with MCP](guides/web-scraping-for-ai-agents-mcp)
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert a whole website to Markdown?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "List the site's page URLs from its sitemap, then convert each page's main content to Markdown. The Python script above does both for small sites. For larger ones, the Sitemap URL Extractor returns the URL list and any page-to-Markdown converter handles the second step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an API that converts a URL to Markdown?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, several: hosted crawl services, reader endpoints, and Apify Actors such as Web to Markdown, which returns one item per URL with a markdown field. You can also self-host with trafilatura."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I extract all URLs from a sitemap.xml?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Read the Sitemap: lines in robots.txt (or try /sitemap.xml), follow any <sitemapindex> to its child sitemaps, and collect every <loc>. Unzip .xml.gz files first. The code above shows it, and this guide goes step by step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a sitemap scraper the same as a crawler?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. A sitemap scraper reads the page list the site publishes, which is fast and cheap but finds only listed pages. A crawler follows links from page to page, which finds unlisted pages but takes longer and makes many more requests."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I scrape a Telegram channel without an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For public channels, yes: Telegram serves a web preview at t.me/s/<channel> that anyone can open. Private channels and channels with the preview turned off are not reachable that way. Telegram's official API (for example through the Telethon library) needs an account and an API ID."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Sitemap URL Extractor",
+          "url": "https://apify.com/datagleaner/sitemap-extractor",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Every page URL a site's sitemaps list, with lastmod, changefreq, priority, image count and source sitemap.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.20",
+              "priceCurrency": "USD",
+              "description": "US$0.20 per 1,000 URLs",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.20",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1000,
+                  "unitText": "URLs"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+</script>

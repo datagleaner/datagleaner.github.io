@@ -165,3 +165,95 @@ No login. For a normal list, no proxy either; both Actors run without one by def
 - [Find a YouTube channel's email](guides/find-youtube-channel-email)
 - [How to extract emails from a website for free](guides/extract-emails-from-website-free)
 - [Get all URLs from a sitemap in Python](guides/get-all-urls-from-sitemap-python), useful for building the site list in the first place
+
+<!-- jsonld:auto -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I find email addresses from a list of websites for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a short script like the one above: fetch each site's home and contact pages and match mailto: links and email patterns. It is free and works for small lists; add link-following and de-obfuscation as your list grows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an API to find emails from a website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, two kinds. Email-finder APIs such as Hunter return addresses from their database and pattern guesses. Scraper APIs such as the Apify Actors above fetch the site live and return only what it publishes, with the page it came from."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I extract emails from multiple websites at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pass the whole list in one call. Website Contact Details Scraper takes thousands of domains per run, works through them in parallel and returns one row per site, exportable as CSV, Excel or JSON."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I find an email address from a website link without visiting every page?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A tool still has to fetch the pages, but it only needs a few: the home page, contact, about, legal notice and team pages hold most published addresses. That is why the default here is 8 pages per site."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a proxy or a login?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No login. For a normal list, no proxy either; both Actors run without one by default."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Website Contact Details Scraper",
+          "url": "https://apify.com/datagleaner/website-contact-details-scraper",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Emails, phones (normalized to E.164), LinkedIn, X, Facebook, Instagram, YouTube, TikTok and GitHub links, contact forms, schema.org addresses, company name and description.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.004",
+              "priceCurrency": "USD",
+              "description": "US$0.004 per website with at least one contact",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.004",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "website"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+</script>
