@@ -11,7 +11,7 @@ Web scraping APIs that return clean JSON and charge only for the results you get
 
 - [Chinese social media scrapers](chinese-social-media-scrapers): Weibo, Bilibili, Xiaohongshu (RedNote) and WeChat articles.
 - [Google data scrapers](google-data-scrapers): Google Hotels prices, Google Trends, Google News and the Google Ads Transparency Center.
-- [Contact and lead scrapers](contact-and-lead-scrapers): emails, phones and social accounts from company websites and YouTube channels.
+- [Contact and lead scrapers](contact-and-lead-scrapers): emails, phones and social accounts from company websites and YouTube channels, app developer emails, company team pages, Shopify agencies and researchers.
 - [Job listing scrapers](job-listing-scrapers): company career sites and SEEK as structured data.
 - [Web content scrapers](web-content-scrapers): sitemaps, websites to Markdown, Medium, Behance and Telegram channels.
 
