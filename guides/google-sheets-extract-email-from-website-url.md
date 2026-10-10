@@ -151,7 +151,7 @@ What it does, from its documentation:
 - Finds emails in `mailto:` links, plain text, obfuscated forms such as `name [at] domain [dot] com` and `name(at)domain.com`, Cloudflare email protection and JSON-LD.
 - Also returns phone numbers normalized to E.164, social profiles on 14 platforms (LinkedIn, X, Facebook, Instagram, YouTube, TikTok, GitHub and others), contact forms and schema.org addresses.
 - Returns one row per website, with the page each value was found on. Emails on other domains are kept apart in `otherEmails`, so `emails` holds the site's own addresses.
-- Costs US$4.00 per 1,000 websites with contacts (US$0.004 each). You are charged only for sites that return at least one contact; unreachable sites and sites with no contacts are free.
+- Costs US$2.00 per 1,000 websites with an email (US$0.002 each). You are charged only for sites where at least one email is found; unreachable sites, sites with only phones or social profiles, and sites with no contacts are free.
 
 Its limits: it uses plain HTTP with no browser, so details injected only by scripts are not found, and sites that refuse or rate-limit the request (HTTP 403 or 429) are reported as `unreachable`. Emails shown as images are not read. It crawls up to 30 pages per site (8 by default) and stays on the same domain.
 

@@ -214,7 +214,7 @@ What it does, from its documentation:
 - Fetches the home page and the pages most likely to hold contact details (contact, about, impressum, team and footer links, including Japanese, Chinese, German, French, Spanish and Italian names), on the same domain only, up to `maxPagesPerSite` pages (8 by default, 30 at most). It respects `robots.txt` by default.
 - Reads emails from `mailto:` links, plain text, obfuscated forms such as `name [at] domain [dot] com`, Cloudflare email protection and JSON-LD.
 - Returns phone numbers validated and normalized to E.164, plus social profiles (LinkedIn, X, Facebook, Instagram, YouTube, TikTok, GitHub), contact forms and schema.org addresses, one row per website, each value with the page it came from (`foundOn`).
-- Costs US$4.00 per 1,000 websites that return at least one contact. Unreachable sites and sites with no contacts are free.
+- Costs US$2.00 per 1,000 websites where at least one email is found. Unreachable sites, sites with only phones or social profiles, and sites with no contacts are free.
 
 It uses plain HTTP with no browser, so it has the same blind spot as the script above for details that only scripts inject, and for sites that block non-browser clients. Addresses shown as images are not read.
 

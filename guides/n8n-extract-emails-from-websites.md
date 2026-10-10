@@ -255,7 +255,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 
 ### Price and limits
 
-The price is US$4.00 per 1,000 websites that return at least one contact (any email, phone, contact form or address on the site, or one of its own social profiles; addresses on other domains do not count). Unreachable sites and sites with no contacts are free. The Actor's own example: 5,000 websites, of which about 70% return a contact, costs 3,500 x $0.004 = $14.00.
+The price is US$2.00 per 1,000 websites where at least one email is found (on the site's own domain; addresses on other domains do not count). Sites with only phones, contact forms, addresses or social profiles, unreachable sites and sites with no contacts are free. The Actor's own example: 1,000 websites, of which about 60% have an email, costs 600 x $0.002 = $1.20.
 
 Its limits, from its documentation: it uses plain HTTP with no browser, so details injected only by scripts, and sites that block non-browser clients (HTTP 403 or 429), are not found. Emails and phones shown as images are not read. Text addresses are not parsed, only schema.org addresses. Each item has a `status` of `ok`, `noContacts`, `unreachable`, `blockedByRobots`, `invalidUrl` or `error`, which the workflow writes to the `status` column so you can see why a row is empty.
 
@@ -274,7 +274,7 @@ Not for the Actor workflow. The scraper returns emails, E.164 phones, socials an
 Check the `status` column. `noContacts` means the pages it was allowed to read had none, `unreachable` means a timeout or an HTTP error such as 403 or 429, and `blockedByRobots` means the site's robots.txt disallows the pages. Sites that only inject contact details with JavaScript will show `noContacts`, because the Actor does not run a browser.
 
 **What does it cost to run on 1,000 sites?**
-With Data Gleaner's Actor it is US$4.00 per 1,000 websites that return at least one contact, and nothing for unreachable sites or sites with no contacts, so 1,000 sites with a 70% hit rate would cost about $2.80. n8n bills separately under its own plans.
+With Data Gleaner's Actor it is US$2.00 per 1,000 websites where at least one email is found, and nothing for unreachable sites or sites without an email, so 1,000 sites of which 60% have an email (an assumed share) would cost about $1.20. n8n bills separately under its own plans.
 
 **Is it legal to scrape emails from websites?**
 It depends on where you and the people you contact are and on what you do with the addresses. Reading public pages is one thing; storing addresses that identify a person and sending them marketing is regulated by data protection and anti-spam laws such as GDPR. This page is not legal advice, so check the rules that apply to you before you contact anyone.
@@ -328,7 +328,7 @@ It depends on where you and the people you contact are and on what you do with t
       "name": "What does it cost to run on 1,000 sites?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With Data Gleaner's Actor it is US$4.00 per 1,000 websites that return at least one contact, and nothing for unreachable sites or sites with no contacts, so 1,000 sites with a 70% hit rate would cost about $2.80. n8n bills separately under its own plans."
+        "text": "With Data Gleaner's Actor it is US$2.00 per 1,000 websites where at least one email is found, and nothing for unreachable sites or sites without an email, so 1,000 sites of which 60% have an email (an assumed share) would cost about $1.20. n8n bills separately under its own plans."
       }
     },
     {

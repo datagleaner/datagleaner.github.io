@@ -196,7 +196,7 @@ What it does, from its documentation:
 - Reads local numbers using the site's country, inferred from the domain, page language and structured data, or your `defaultCountry` when you set one.
 - Fetches the home page and the pages most likely to hold contact details (contact, about, impressum, team and footer links, including Japanese, Chinese, German, French, Spanish and Italian names), on the same domain only, up to `maxPagesPerSite` pages (8 by default, 30 at most). It respects `robots.txt` by default.
 - Also returns emails, social profiles, contact forms and schema.org addresses for each site, one row per website.
-- Costs US$4.00 per 1,000 websites that return at least one contact. Unreachable sites and sites with no contacts are free.
+- Costs US$2.00 per 1,000 websites where at least one email is found. A site where only a phone number is found is free, as are unreachable sites and sites with no contacts.
 
 It uses plain HTTP with no browser, so it has the same blind spot as the script above for details that only scripts inject and for sites that block non-browser clients. Numbers shown as images are not read.
 

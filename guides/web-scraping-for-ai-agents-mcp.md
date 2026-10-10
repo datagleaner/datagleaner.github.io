@@ -127,7 +127,7 @@ These three Actors are public on the Apify Store, charge per result, and stop at
 
 | Actor | What one result is | Price |
 |---|---|---|
-| [Website Contact Details Scraper](https://apify.com/datagleaner/website-contact-details-scraper) | One website where at least one email, phone or social profile was found; sites with nothing found are free | US$4.00 per 1,000 ($0.004 each) |
+| [Company Contact Details & Website Email Finder](https://apify.com/datagleaner/website-contact-details-scraper) | One website where at least one email was found; every other site, including sites with only phones or social profiles, is free | US$2.00 per 1,000 ($0.002 each) |
 | [Sitemap URL Extractor](https://apify.com/datagleaner/sitemap-extractor) | One page URL found in the site's sitemaps | US$0.20 per 1,000 ($0.0002 each) |
 | [Weibo Scraper](https://apify.com/datagleaner/weibo-scraper) | One Weibo post from search or a user's timeline | US$3.00 per 1,000 ($0.003 each) |
 
@@ -148,7 +148,7 @@ The agent calls the contact details tool with an input like this:
 }
 ```
 
-The Actor returns one item per website with `emails`, `phones` (normalized to E.164), `socials`, contact form pages and the company name, each value with the page it came from. Three sites cost at most US$0.012, and a site where nothing is found costs nothing. It respects `robots.txt` by default (`respectRobotsTxt`). If you only need a handful of sites and no API, the free methods in [how to extract emails from a website](extract-emails-from-website-free) work without any account.
+The Actor returns one item per website with `emails`, `phones` (normalized to E.164), `socials`, contact form pages and the company name, each value with the page it came from. Three sites cost at most US$0.006, and a site with no email costs nothing. It respects `robots.txt` by default (`respectRobotsTxt`). If you only need a handful of sites and no API, the free methods in [how to extract emails from a website](extract-emails-from-website-free) work without any account.
 
 ### 2. Every URL in a website's sitemap
 

@@ -115,7 +115,7 @@ Save it as `emails.py` and run `python emails.py example.com`. It is deliberatel
 
 Free methods cost your time. For one site, view source wins. Once you have dozens or thousands of sites, or you need the same fields every time for a spreadsheet or a pipeline, a pay-per-result scraper can cost less than the hour you would spend.
 
-**Website Contact Details Scraper** ([apify.com/datagleaner/website-contact-details-scraper](https://apify.com/datagleaner/website-contact-details-scraper)) takes website URLs or bare domains, reads up to 8 pages per site by default, 30 at most (the home page plus its contact, about, legal-notice and team pages), and returns emails, phone numbers in E.164, social profiles, contact forms and schema.org addresses, each with the page it came from. It decodes `[at]`/`[dot]` forms and Cloudflare-protected addresses and respects `robots.txt` by default. It costs US$0.004 per website that returns at least one contact (US$4.00 per 1,000); sites with nothing found are not charged. Apify's free plan includes a monthly platform credit, which covers small test runs.
+**Website Contact Details Scraper** ([apify.com/datagleaner/website-contact-details-scraper](https://apify.com/datagleaner/website-contact-details-scraper)) takes website URLs or bare domains, reads up to 8 pages per site by default, 30 at most (the home page plus its contact, about, legal-notice and team pages), and returns emails, phone numbers in E.164, social profiles, contact forms and schema.org addresses, each with the page it came from. It decodes `[at]`/`[dot]` forms and Cloudflare-protected addresses and respects `robots.txt` by default. It costs US$0.002 per website where at least one email is found (US$2.00 per 1,000); every other site, including sites with only phones or social profiles, is not charged. Apify's free plan includes a monthly platform credit, which covers small test runs.
 
 Its limits are the same as the script's on two points: it does not render JavaScript, and a site that refuses automated requests is reported as `unreachable` rather than worked around.
 
@@ -141,7 +141,7 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
     print("  emails:", [e["value"] for e in item.get("emails") or []])
 ```
 
-Three sites cap this run at three billable results, at most about US$0.012. For whole lists of domains, see [contact and lead scrapers](../contact-and-lead-scrapers).
+Three sites cap this run at three billable results, at most about US$0.006. For whole lists of domains, see [contact and lead scrapers](../contact-and-lead-scrapers).
 
 ## Caveats
 
