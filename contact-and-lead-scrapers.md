@@ -76,6 +76,11 @@ These Actors charge only when they find something: a website with no email, a Yo
 | Company Leadership & Team Page Scraper | Company domains | Every named person on the company's own team, about, leadership and Impressum pages, with job title, seniority, LinkedIn link and published email; it never guesses an email | US$0.002 per person | [team-page-contacts](https://apify.com/datagleaner/team-page-contacts) |
 | Shopify Partner & Agency Contacts | Countries, services, languages, tiers or partner URLs | Agencies and experts from the Shopify Partner Directory with public email, phone, website, location, services, rating, reviews, price range and tier | US$0.005 per partner with an email or phone; others are free | [shopify-partner-contacts](https://apify.com/datagleaner/shopify-partner-contacts) |
 | Researcher Email Finder | Research topics, author names, PMIDs or DOIs | Researchers with the email they published in PubMed papers, plus affiliation, country, ORCID and recent papers | US$0.005 per researcher with an email | [researcher-email-finder](https://apify.com/datagleaner/researcher-email-finder) |
+| Form D Funding Leads: Newly Funded Companies & Executives | Keywords, US states, industries, company names or CIKs, and a filing-date window | Companies that just filed an SEC Form D: amount raised and sold, number of investors, phone, address, industry, exemption, and the executives and directors named on the filing; funds and amendments are dropped by default | US$0.01 per filing with a named executive or director | [form-d-funding-leads](https://apify.com/datagleaner/form-d-funding-leads) |
+| YC Founder Contacts | Companies, YC batch, industry, tag, status, location or a hiring filter | One row per Y Combinator company with each founder's name, title, LinkedIn, X and bio, plus the company website, batch, team size and hiring flag; optional public emails and phones from the company site | US$0.003 per company with a named founder | [yc-founder-contacts](https://apify.com/datagleaner/yc-founder-contacts) |
+| Link in Bio Email Finder | Linktree, Taplink or AllMyLinks URLs, other bio-link pages, or bare handles | The creator's public email, phone, Instagram, TikTok, YouTube, X, website, booking and shop links from their link-in-bio page | US$0.004 per profile with an email | [bio-link-email-finder](https://apify.com/datagleaner/bio-link-email-finder) |
+| Company Enrichment by Domain | Company domains or URLs | Company name, description, logo, the official social profiles the site itself claims (LinkedIn company page, X, Facebook, Instagram, YouTube, TikTok, GitHub), general email and phone, address, founding date and tech hints | US$0.0008 per enriched company (US$0.80 per 1,000) | [company-enrichment-by-domain](https://apify.com/datagleaner/company-enrichment-by-domain) |
+| Shopify App Developer Contacts | Keywords, categories, app URLs or developer URLs | The developer behind each Shopify App Store app: support email, website, address, partner page, plus rating, review count, pricing and launch date | US$0.002 per app with a developer email | [shopify-app-developer-contacts](https://apify.com/datagleaner/shopify-app-developer-contacts) |
 
 **Company Contact Details & Website Email Finder** reads the home page and up to `maxPagesPerSite` pages per site (default 8, up to 30): contact, about, impressum or legal notice, team and company profile pages, including Japanese, Chinese, German, French, Spanish and Italian equivalents. It decodes obfuscated forms such as `name [at] domain [dot] com` and Cloudflare-protected addresses, stays on the same domain and respects `robots.txt` by default. Worked example from its README: 1,000 websites, of which about 60% have an email, costs 600 x US$0.002 = US$1.20.
 
@@ -88,6 +93,16 @@ These Actors charge only when they find something: a website with no email, a Yo
 **Shopify Partner & Agency Contacts** reads the official Shopify Partner Directory, which is open to the public. Worked example from its README: the directory lists 221 partners in Germany, so a run with `countries: ["de"]` returns all of them for about 221 x US$0.005 = US$1.11 at its measured contact rate.
 
 **Researcher Email Finder** searches PubMed (or Europe PMC) for a topic and returns each researcher whose email is printed in a paper, with affiliation, ORCID and the papers that carried the address. Worked example from its README: three topics with `maxResearchers: 150` cost 150 x US$0.005 = US$0.75.
+
+**Form D Funding Leads** turns each private raise filed with SEC EDGAR into one row, usually the day SEC accepts it. Form D has no business description, so a sector keyword such as `software` or `biotech` is matched against Form D's industry groups as well as the text. It returns phone and the people named on the filing, not emails; filings with no named person or usable phone, and error rows, are free. See [how to find companies that just raised money](guides/sec-form-d-newly-funded-companies). Example tasks you can run as they are: [newly funded software startups this week](https://apify.com/datagleaner/form-d-funding-leads/newly-funded-software-startups-this-week), [biotech funding rounds form d leads](https://apify.com/datagleaner/form-d-funding-leads/biotech-funding-rounds-form-d-leads), [texas companies raising over 1m form d](https://apify.com/datagleaner/form-d-funding-leads/texas-companies-raising-over-1m-form-d).
+
+**YC Founder Contacts** reads each company's public ycombinator.com page, picks companies from the open yc-oss directory and never touches YC's search pages. Founders come from YC's own pages, so LinkedIn and X are what YC lists. Turning on `findEmails` adds only the emails and phones the company publishes on its own website, at no extra cost; companies with no founder data are free. Example tasks you can run as they are: [yc w25 founders linkedin list](https://apify.com/datagleaner/yc-founder-contacts/yc-w25-founders-linkedin-list), [yc ai startups hiring now](https://apify.com/datagleaner/yc-founder-contacts/yc-ai-startups-hiring-now), [yc fintech founders contact list](https://apify.com/datagleaner/yc-founder-contacts/yc-fintech-founders-contact-list).
+
+**Link in Bio Email Finder** reads the public page, not the creator's Instagram or TikTok profile, so a handle only works if the creator has a bio-link page under that name. Pages that refuse automated requests (Beacons, solo.to) are reported as errors and never worked around. Pages without an email, missing pages and errors are free. Example tasks you can run as they are: [linktree creator emails from urls](https://apify.com/datagleaner/bio-link-email-finder/linktree-creator-emails-from-urls), [find creator email from instagram handle](https://apify.com/datagleaner/bio-link-email-finder/find-creator-email-from-instagram-handle), [creator contact emails from link in bio handles](https://apify.com/datagleaner/bio-link-email-finder/creator-contact-emails-from-link-in-bio-handles).
+
+**Company Enrichment by Domain** reads a domain's home page and up to two linked contact and about pages, using the site's own schema.org data. It is a light, public-pages alternative to a firmographic database: it has no employee counts, revenue or funding, and it returns a general inbox, not a named person. Unreachable, parked and empty domains are free. See [Clearbit alternatives](guides/clearbit-alternative-company-enrichment-by-domain). Example tasks you can run as they are: [enrich a list of domains clearbit alternative](https://apify.com/datagleaner/company-enrichment-by-domain/enrich-a-list-of-domains-clearbit-alternative), [company tech stack and socials from domain](https://apify.com/datagleaner/company-enrichment-by-domain/company-tech-stack-and-socials-from-domain), [crm lead enrichment logo description contacts](https://apify.com/datagleaner/company-enrichment-by-domain/crm-lead-enrichment-logo-description-contacts).
+
+**Shopify App Developer Contacts** reads the support section the developer fills in on the app page, never the rest of the page, so emails quoted in reviews or on similar-app cards do not leak into a row. Apps with no email are free. For agencies rather than app makers, use Shopify Partner & Agency Contacts above. Example tasks you can run as they are: [support email of shopify apps by keyword](https://apify.com/datagleaner/shopify-app-developer-contacts/support-email-of-shopify-apps-by-keyword), [shopify upsell app developer emails](https://apify.com/datagleaner/shopify-app-developer-contacts/shopify-upsell-app-developer-emails), [shopify subscription app developers with websites](https://apify.com/datagleaner/shopify-app-developer-contacts/shopify-subscription-app-developers-with-websites).
 
 ### Who uses them for what
 
@@ -453,6 +468,176 @@ No login. For a normal list, no proxy either; the Actors run without one by defa
                   "@type": "QuantitativeValue",
                   "value": 1,
                   "unitText": "researcher"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Form D Funding Leads: Newly Funded Companies & Executives",
+          "url": "https://apify.com/datagleaner/form-d-funding-leads",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Companies that just filed an SEC Form D: amount raised and sold, number of investors, phone, address, industry, exemption, and the executives and directors named on the filing; funds and amendments are dropped by default",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.01",
+              "priceCurrency": "USD",
+              "description": "US$0.01 per filing with a named executive or director",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.01",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "filing"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "YC Founder Contacts",
+          "url": "https://apify.com/datagleaner/yc-founder-contacts",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "One row per Y Combinator company with each founder's name, title, LinkedIn, X and bio, plus the company website, batch, team size and hiring flag; optional public emails and phones from the company site",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.003",
+              "priceCurrency": "USD",
+              "description": "US$0.003 per company with a named founder",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.003",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "company"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Link in Bio Email Finder",
+          "url": "https://apify.com/datagleaner/bio-link-email-finder",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "The creator's public email, phone, Instagram, TikTok, YouTube, X, website, booking and shop links from their link-in-bio page",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.004",
+              "priceCurrency": "USD",
+              "description": "US$0.004 per profile with an email",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.004",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "profile"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 10,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Company Enrichment by Domain",
+          "url": "https://apify.com/datagleaner/company-enrichment-by-domain",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "Company name, description, logo, the official social profiles the site itself claims (LinkedIn company page, X, Facebook, Instagram, YouTube, TikTok, GitHub), general email and phone, address, founding date and tech hints",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.0008",
+              "priceCurrency": "USD",
+              "description": "US$0.0008 per enriched company (US$0.80 per 1,000)",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.0008",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "company"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 11,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Shopify App Developer Contacts",
+          "url": "https://apify.com/datagleaner/shopify-app-developer-contacts",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "The developer behind each Shopify App Store app: support email, website, address, partner page, plus rating, review count, pricing and launch date",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Data Gleaner"
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0.002",
+              "priceCurrency": "USD",
+              "description": "US$0.002 per app with a developer email",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "0.002",
+                "priceCurrency": "USD",
+                "referenceQuantity": {
+                  "@type": "QuantitativeValue",
+                  "value": 1,
+                  "unitText": "app"
                 }
               }
             }

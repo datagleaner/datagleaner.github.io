@@ -45,6 +45,8 @@ Practical answers to data questions. Each guide covers the free and do-it-yourse
 - [n8n workflow to scrape emails from a list of websites](n8n-extract-emails-from-websites)
 - [Find emails for Google Maps leads from the website column](enrich-google-maps-leads-with-emails)
 - [Enrich HubSpot companies with email and phone from the website domain](enrich-hubspot-companies-contact-details)
+- [Clearbit alternative: enrich companies by domain](clearbit-alternative-company-enrichment-by-domain)
+- [SEC Form D: find companies that just raised money](sec-form-d-newly-funded-companies)
 
 ## Websites and content
 

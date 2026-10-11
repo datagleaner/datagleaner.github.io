@@ -11,7 +11,7 @@ Web scraping APIs that return clean JSON and charge only for the results you get
 
 - [Chinese social media scrapers](chinese-social-media-scrapers): Weibo, Bilibili, Xiaohongshu (RedNote) and WeChat articles.
 - [Google data scrapers](google-data-scrapers): Google Hotels prices, Google Trends, Google News and the Google Ads Transparency Center.
-- [Contact and lead scrapers](contact-and-lead-scrapers): emails, phones and social accounts from company websites and YouTube channels, app developer emails, company team pages, Shopify agencies and researchers.
+- [Contact and lead scrapers](contact-and-lead-scrapers): emails, phones and social accounts from company websites and YouTube channels, app developer emails, company team pages, Shopify agencies and app developers, researchers, YC founders, SEC Form D funding leads, link-in-bio creators and company enrichment by domain.
 - [Job listing scrapers](job-listing-scrapers): company career sites and SEEK as structured data.
 - [Web content scrapers](web-content-scrapers): sitemaps, websites to Markdown, Medium, Behance and Telegram channels.
 
@@ -22,6 +22,8 @@ Web scraping APIs that return clean JSON and charge only for the results you get
 - [Pytrends alternative: Google Trends data in Python](guides/pytrends-alternative-google-trends-python)
 - [Weibo API in Python: official API, m.weibo.cn and options](guides/weibo-api-python)
 - [Web scraping MCP server for AI agents](guides/web-scraping-for-ai-agents-mcp)
+- [SEC Form D: find companies that just raised money](guides/sec-form-d-newly-funded-companies)
+- [Clearbit alternative: enrich companies by domain](guides/clearbit-alternative-company-enrichment-by-domain)
 
 [All guides](guides/)
 
