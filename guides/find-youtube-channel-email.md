@@ -99,8 +99,7 @@ This only sees the channel description. It misses addresses written as `name (at
 
 ### YouTube Channel Email & Influencer Contacts Finder
 
-Disclosure: Data Gleaner is us. Our YouTube Channel Email & Influencer Contacts Finder (`youtube-channel-contacts`) is not listed on the Apify Store yet; it will appear on the [Data Gleaner store page](https://apify.com/datagleaner) when it is.
-<!-- TODO(store-link: youtube-channel-contacts) -->
+Disclosure: Data Gleaner is us. Our [YouTube Channel Email & Influencer Contacts Finder](https://apify.com/datagleaner/youtube-channel-contacts) is on the Apify Store at $0.015 per channel with an email found; channels without one are free.
 
 It does steps 2 and 3 above for each channel:
 

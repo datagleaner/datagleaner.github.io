@@ -1,5 +1,5 @@
 ---
-title: Website Contact & Email Scrapers Compared: Price per 1,000 Sites
+title: "Website Contact & Email Scrapers Compared: Price per 1,000 Sites"
 description: What 1,000 and 10,000 websites cost on eight Apify contact scrapers and Hunter, Snov.io and Skrapp, with current prices, limits and who each suits. Fetched 11 Oct 2026.
 ---
 
