@@ -92,6 +92,7 @@ These cannot be run yet. Prices are the planned ones; each family page will link
 - [n8n Workflow to Scrape Emails From a List of Websites](https://datagleaner.github.io/guides/n8n-extract-emails-from-websites)
 - [SEC Form D: How to Find Companies That Just Raised Money (Python and API)](https://datagleaner.github.io/guides/sec-form-d-newly-funded-companies)
 - [Clearbit Alternative: Enrich Companies by Domain (Free Script and API)](https://datagleaner.github.io/guides/clearbit-alternative-company-enrichment-by-domain)
+- [Website Contact & Email Scrapers Compared: Price per 1,000 Sites](https://datagleaner.github.io/guides/website-email-scraper-price-comparison): Eight Apify Actors and Hunter, Snov.io and Skrapp priced for 1,000 and 10,000 websites, fetched 11 Oct 2026.
 - [Website Migration Redirect Map From Old Sitemap URLs](https://datagleaner.github.io/guides/website-migration-redirect-map-from-sitemap)
 - [Weibo Sentiment Analysis in Python: jieba, SnowNLP and BERT](https://datagleaner.github.io/guides/weibo-sentiment-analysis-python)
 

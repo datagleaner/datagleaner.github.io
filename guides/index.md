@@ -37,6 +37,7 @@ Practical answers to data questions. Each guide covers the free and do-it-yourse
 
 ## Emails and contacts
 
+- [Website contact and email scrapers compared: price per 1,000 sites](website-email-scraper-price-comparison)
 - [How to extract emails from a website for free](extract-emails-from-website-free)
 - [How to extract phone numbers from a list of websites](extract-phone-numbers-from-websites)
 - [Google Sheets: extract email from a website URL](google-sheets-extract-email-from-website-url)
