@@ -79,6 +79,7 @@ These cannot be run yet. Prices are the planned ones; each family page will link
 - [Extract Phone Numbers From a List of Websites](https://datagleaner.github.io/guides/extract-phone-numbers-from-websites)
 - [Find Social Media Profiles From a List of Company Websites](https://datagleaner.github.io/guides/find-company-social-media-profiles-from-website)
 - [Google Sheets - Extract Email From a Website URL](https://datagleaner.github.io/guides/google-sheets-extract-email-from-website-url)
+- [Find Emails for a List of Websites in Google Sheets (Apps Script)](https://datagleaner.github.io/guides/find-emails-for-website-list-in-google-sheets)
 - [Hotel Price Comparison API: Booking vs Agoda vs Expedia as JSON](https://datagleaner.github.io/guides/hotel-price-comparison-api)
 - [Scrape Google Hotels with Python (No Browser, No Proxy)](https://datagleaner.github.io/guides/scrape-google-hotels-python)
 - [Export Sitemap URLs to Excel or CSV (Index, .gz, Many Sites)](https://datagleaner.github.io/guides/sitemap-to-csv-excel)

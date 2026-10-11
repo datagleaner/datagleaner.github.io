@@ -212,6 +212,7 @@ Reading publicly published pages is technically simple, but what you do with the
 
 ## Related guides
 
+- [Find emails for a list of websites in Google Sheets](find-emails-for-website-list-in-google-sheets): an Apps Script that fills a whole column.
 - [How to extract emails from a website for free](extract-emails-from-website-free): five free methods, from view source to a browser console snippet.
 - [Find emails from a list of websites](../contact-and-lead-scrapers): the bulk version of this task, with no spreadsheet formulas.
 - [Get all URLs from a sitemap in Python](get-all-urls-from-sitemap-python): build the list of pages to check before you extract.

@@ -25,6 +25,7 @@ Web scraping APIs that return clean JSON and charge only for the results you get
 - [Web scraping MCP server for AI agents](guides/web-scraping-for-ai-agents-mcp)
 - [SEC Form D: find companies that just raised money](guides/sec-form-d-newly-funded-companies)
 - [Clearbit alternative: enrich companies by domain](guides/clearbit-alternative-company-enrichment-by-domain)
+- [Find emails for a list of websites in Google Sheets](guides/find-emails-for-website-list-in-google-sheets)
 
 [All guides](guides/)
 

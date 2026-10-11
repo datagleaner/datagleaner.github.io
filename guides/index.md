@@ -41,6 +41,7 @@ Practical answers to data questions. Each guide covers the free and do-it-yourse
 - [How to extract emails from a website for free](extract-emails-from-website-free)
 - [How to extract phone numbers from a list of websites](extract-phone-numbers-from-websites)
 - [Google Sheets: extract email from a website URL](google-sheets-extract-email-from-website-url)
+- [Find emails for a list of websites in Google Sheets (Apps Script)](find-emails-for-website-list-in-google-sheets)
 - [How to find a YouTuber's email](find-youtube-channel-email)
 - [Find social media profiles from a list of company websites](find-company-social-media-profiles-from-website)
 - [n8n workflow to scrape emails from a list of websites](n8n-extract-emails-from-websites)
