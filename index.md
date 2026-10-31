@@ -1,11 +1,26 @@
 ---
 title: Data Gleaner - web scraping APIs, priced per result
-description: Data Gleaner builds web scraping APIs on the Apify Store for Weibo, Bilibili, Google Hotels, sitemaps and company contacts. Pay per result, no subscription.
+description: Data Gleaner builds web scraping APIs on the Apify Store, led by a company contact and website email finder at $2 per 1,000 sites with an email, plus Weibo, Google Maps leads and more. Pay per result, no subscription.
 ---
 
 # Data Gleaner
 
 Web scraping APIs that return clean JSON and charge only for the results you get. Each one runs on the [Apify Store](https://apify.com/datagleaner), so you can start it from the web console, call it from Python or JavaScript, schedule it, or let an AI agent call it through Apify's MCP server.
+
+## Featured: Company Contact Details & Website Email Finder
+
+Give it a list of company websites or domains and get back every public email, phone number (E.164), social profile, contact form and address, each with the page it was found on. **$2 per 1,000 sites where an email is found**; sites with no email, and sites that fail, are free. No subscription, no login.
+
+[Open it on the Apify Store](https://apify.com/datagleaner/website-contact-details-scraper) | [How it compares on price](guides/website-email-scraper-price-comparison) | [Python and API guide](contact-and-lead-scrapers)
+
+Next in the same family:
+
+- [Company Executives & Decision Makers](https://apify.com/datagleaner/team-page-contacts): named leadership from a company's own team pages, with title and LinkedIn.
+- [Company Domain Finder](https://apify.com/datagleaner/company-domain-finder): company names to official websites, logos and LinkedIn pages.
+- [Google Maps Leads Scraper](https://apify.com/datagleaner/google-maps-leads): local businesses with phones, emails and decision makers.
+- [YouTube Channel Email Scraper](https://apify.com/datagleaner/youtube-channel-contacts), [Weibo Scraper](https://apify.com/datagleaner/weibo-scraper), [WeChat Articles](https://apify.com/datagleaner/wechat-articles) and [Google Play Scraper](https://apify.com/datagleaner/google-play-scraper).
+
+All of them are one tool call away for AI agents through our [MCP server](https://github.com/datagleaner/data-gleaner-mcp).
 
 ## Scrapers by family
 
